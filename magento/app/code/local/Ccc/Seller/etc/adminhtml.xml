@@ -1,0 +1,49 @@
+<config>
+    <menu>
+        <seller>
+            <title>Seller</title>
+            <sort_order>330</sort_order>
+            <children>
+                <seller>
+                    <title>Manage Seller</title>
+                    <sort_order>10</sort_order>
+                    <action>seller/adminhtml_seller</action>
+                </seller>
+                <seller_attribute>
+                    <title>Manage Attribute</title>
+                    <sort_order>10</sort_order>
+                    <action>seller/adminhtml_seller_attribute</action>
+                </seller_attribute>
+                <seller_attribute_set>
+                    <title>Manage Attribute Set</title>
+                    <sort_order>10</sort_order>
+                    <action>seller/adminhtml_seller_set</action>
+                </seller_attribute_set>
+            </children>
+        </seller>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>Allow Everything</all>
+            <admin>
+                <children>
+                    <seller>
+                        <title>Seller</title>
+                        <children>
+                            <seller>
+                                <title>Manage Seller</title>
+                            </seller>
+                            <seller_attribute>
+                                <title>Manage Seller Attribute</title>
+                            </seller_attribute>
+                            <seller_attribute_set>
+                                <title>Manage Seller Attribute Set</title>
+                            </seller_attribute_set>
+                        </children>
+                    </seller>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

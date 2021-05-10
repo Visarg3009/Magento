@@ -1,0 +1,9 @@
+a:5:{i:0;s:324:"Error in file: "C:\xampp\htdocs\Project\Magento\magento\app\code\local\Ccc\Seller\sql\seller_setup\mysql4-upgrade-1.0.1-1.0.2.php" - SQLSTATE[42S02]: Base table or view not found: 1146 Table 'magento1.seller_varchar' doesn't exist, query was: ALTER TABLE `seller_varchar` ADD UNIQUE( `attribute_id`, `store_id`, `entity_id`)";i:1;s:1082:"#0 C:\xampp\htdocs\Project\Magento\magento\app\code\core\Mage\Core\Model\Resource\Setup.php(644): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 C:\xampp\htdocs\Project\Magento\magento\app\code\core\Mage\Core\Model\Resource\Setup.php(437): Mage_Core_Model_Resource_Setup->_modifyResourceDb('upgrade', '1.0.1', '1.0.2')
+#2 C:\xampp\htdocs\Project\Magento\magento\app\code\core\Mage\Core\Model\Resource\Setup.php(320): Mage_Core_Model_Resource_Setup->_upgradeResourceDb('1.0.1', '1.0.2')
+#3 C:\xampp\htdocs\Project\Magento\magento\app\code\core\Mage\Core\Model\Resource\Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 C:\xampp\htdocs\Project\Magento\magento\app\code\core\Mage\Core\Model\App.php(428): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 C:\xampp\htdocs\Project\Magento\magento\app\code\core\Mage\Core\Model\App.php(354): Mage_Core_Model_App->_initModules()
+#6 C:\xampp\htdocs\Project\Magento\magento\app\Mage.php(683): Mage_Core_Model_App->run(Array)
+#7 C:\xampp\htdocs\Project\Magento\magento\index.php(83): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:100:"/project/magento/magento/index.php/grid/Adminhtml_Adgrid/index/key/0ede1394edc45eb5d57cd4e3ede97eb8/";s:11:"script_name";s:34:"/project/magento/magento/index.php";s:4:"skin";s:7:"default";}
