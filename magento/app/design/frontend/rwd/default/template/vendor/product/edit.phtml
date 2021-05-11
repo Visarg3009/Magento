@@ -1,0 +1,111 @@
+<?php $groupCollection = $this->getGroups(); ?>
+<?php echo $this->getMessagesBlock()->toHtml(); ?>
+<?php $product = $this->getProduct(); ?>
+<form action="<?php echo $this->getSaveUrl(); ?>" method="post">
+
+    <p class="form-buttons"><button id="" title="Back" type="button" class="scalable back button" onclick="setLocation('<?php echo $this->getBackUrl(); ?>')"><span><span><span>Back</span></span></span></button><button id="id_52db7b617f25eaaf05842dc36f56bf6a" title="Reset" type="button" class="scalable button" onclick="setLocation(window.location.href)"><span><span><span>Reset</span></span></span></button><button id="id_294b29a02f6773bca60ceced7bed42e2" title="Save" type="submit" class="scalable save button"><span><span><span>Save</span></span></span></button><?php if (array_key_exists('attribute_id', $attributeData)) : ?><button id="id_294b29a02f6773bca60ceced7bed42e2" title="Save" type="button" onclick="setLocation('<?php echo $this->getDeleteUrl(); ?>')" class="scalable save button"><span><span><span>Delete</span></span></span></button><?php endif; ?></p>
+    <?php foreach ($groupCollection as $group) : ?>
+        <div id="<?php echo $group->getAttributeGroupId(); ?>" class="tabcontent">
+            <?php $attributes = $this->getGroupAttributes($group); ?>
+
+            <?php foreach ($attributes as $key => $attribute) : ?>
+                <?php $attribute = Mage::getResourceModel('vendor/eav_attribute')->load($attribute->getId());
+
+                if ($attribute->getFrontendLabel() == NULL) {
+                    unset($attributes[$key]);
+                }
+                if (!$attribute->getIsVisible()) {
+                    unset($attributes[$key]);
+                } ?>
+            <?php endforeach; ?>
+            <?php foreach ($attributes as $key => $attribute) : ?>
+                <table cellspacing="0" class="form-list data-table" border="1" width="890px">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <?php echo $attribute->getFrontendLabel(); ?>
+                            </td>
+                            <td>
+                                <?php switch ($attribute->getFrontendInput()):
+                                    case 'select': ?>
+                                        <select class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                            <?php if ($attribute->getData()['is_user_defined']) : ?>
+                                                <?php foreach ($this->getOptionValues($attribute, 'select') as $_value) : ?>
+                                                    <option value="<?php echo $_value->getId(); ?>" <?php if ($this->getValue($attribute) == $_value->getId()) : ?> selected <?php endif; ?>><?php echo $_value->getValue() ?></option>
+                                                <?php endforeach; ?>
+                                                <?php  ?>
+                                            <?php elseif ($attribute->getAttributeCode() == 'status') : ?>
+                                                <option value="1" <?php if ($this->getValue($attribute) == 1) : ?> selected <?php endif; ?>>Enable</option>
+                                                <option value="0" <?php if ($this->getValue($attribute) == 0) : ?> selected <?php endif; ?>>Disable</option>
+                                            <?php elseif ($attribute->getAttributeCode() == 'is_recurring') : ?>
+                                                <option value="0" <?php if ($this->getValue($attribute) == 0) : ?> selected <?php endif; ?>>No</option>
+                                                <option value="1" <?php if ($this->getValue($attribute) == 1) : ?> selected <?php endif; ?>>Yes</option>
+                                            <?php endif; ?>
+                                            <?php break; ?>
+                                        </select>
+                                    <?php
+                                    case 'text': ?>
+                                        <input type="text" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <?php break; ?>
+
+                                    <?php
+                                    case 'date': ?>
+                                        <input type="date" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <?php break; ?>
+
+                                    <?php
+                                    case 'price':
+                                    case 'weight': ?>
+                                        <input type="text" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <?php break; ?>
+
+                                    <?php
+                                    case 'textarea': ?>
+                                        <textarea name="product[<?php echo $attribute->getAttributeCode() ?>]" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>><?php echo $this->getValue($attribute); ?></textarea>
+                                        <?php break; ?>
+
+                                    <?php
+                                    case 'multiselect': ?>
+                                        <select multiple class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>][]" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                            <?php $array = explode(',', $this->getValue($attribute)); ?>
+                                            <?php foreach ($this->getOptionValues($attribute, 'multiselect') as $_value) : ?>
+                                                <option value="<?php echo $_value->getId(); ?>" <?php if (in_array($_value->getId(), $array)) : ?> selected <?php endif; ?>><?php echo $_value->getValue(); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <?php break; ?>
+                                <?php endswitch; ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+</form>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    document.getElementById("30").click();
+</script>
+
+<style>
+    .tab button.active {
+        background-color: green;
+    }
+
+    .tabcontent {
+        display: none;
+    }
+</style>

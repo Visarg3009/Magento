@@ -1,0 +1,63 @@
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php $group = $this->getGroup(); ?>
+<div class="page-title">
+    <h3><?php echo $this->__('Add Attribute Group') ?></h3>
+</div>
+<form action="<?php echo $this->getSaveUrl() ?>" method="post">
+    <a href="<?php echo $this->getBackUrl() ?>" class="button"><?php echo $this->__('Back') ?></a>
+    <button type="submit" class="button"><?php echo $this->__('Save') ?></button><br><br>
+    <table class="data-table">
+        <tr>
+            <td>Group Name:</td>
+            <td><input type="text" value="<?php echo $group->getAttributeGroupName(); ?>" name="attribute_group_name" required></td>
+        </tr>
+    </table>
+</form>
+<?php if ($group->getId()) : ?>
+    <form action="<?php echo $this->getUpdateUrl() ?>" method="post">
+        <table>
+            <button type="submit" class="button"><?php echo $this->__('Update') ?></button><br><br>
+            <tbody>
+                <tr>
+                    <td><b>Attribute in this group</b></td>
+                    <td width="150px"></td>
+                    <td><b>Unassigned Attributes</b></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody>
+                                <?php if ($attributes = $this->getGroupAttributes()) : ?>
+                                    <?php foreach ($attributes as $attribute) : ?>
+                                        <tr>
+                                            <td>
+                                                <input name="removeGroupAttributes[<?php echo $attribute['attribute_id'] ?>]" value="<?php echo $attribute['attribute_id'] ?>" type="checkbox">&nbsp;<?php echo $attribute['frontend_label'] ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="150px"></td>
+                    <td>
+                        <table>
+                            <tbody>
+                                <?php if ($attributes = $this->getUnassignedAttributes()) : ?>
+                                    <?php foreach ($attributes as $attribute) : ?>
+                                        <tr>
+                                            <td>
+                                                <input name="assignAttributes[<?php echo $attribute['attribute_id'] ?>]" value="<?php echo $attribute['attribute_id'] ?>" type="checkbox">&nbsp;<?php echo $attribute['frontend_label'] ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+<?php endif; ?>
