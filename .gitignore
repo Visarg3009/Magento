@@ -4,42 +4,42 @@
 
 /PATCH_*.sh
 
-/app/etc/local.xml
+magento/app/etc/local.xml
 
-/media/*
-!/media/.htaccess
+magento/media/*
+!magento/media/.htaccess
 
-!/media/customer
-/media/customer/*
-!/media/customer/.htaccess
+!magento/media/customer
+magento/media/customer/*
+!magento/media/customer/.htaccess
 
-!/media/dhl
-/media/dhl/*
-!/media/dhl/logo.jpg
+!magento/media/dhl
+magento/media/dhl/*
+!magento/media/dhl/logo.jpg
 
-!/media/downloadable
-/media/downloadable/*
-!/media/downloadable/.htaccess
+!magento/media/downloadable
+magento/media/downloadable/*
+!magento/media/downloadable/.htaccess
 
-!/media/xmlconnect
-/media/xmlconnect/*
+!magento/media/xmlconnect
+magento/media/xmlconnect/*
 
-!/media/xmlconnect/custom
-/media/xmlconnect/custom/*
-!/media/xmlconnect/custom/ok.gif
+!magento/media/xmlconnect/custom
+magento/media/xmlconnect/custom/*
+!magento/media/xmlconnect/custom/ok.gif
 
-!/media/xmlconnect/original
-/media/xmlconnect/original/*
-!/media/xmlconnect/original/ok.gif
+!magento/media/xmlconnect/original
+magento/media/xmlconnect/original/*
+!magento/media/xmlconnect/original/ok.gif
 
-!/media/xmlconnect/system
-/media/xmlconnect/system/*
-!/media/xmlconnect/system/ok.gif
+!magento/media/xmlconnect/system
+magento/media/xmlconnect/system/*
+!magento/media/xmlconnect/system/ok.gif
 
-/var/*
-!/var/.htaccess
+magento/var/*
+!magento/var/.htaccess
 
-!/var/package
-/var/package/*
-!/var/package/*.xml
+!magento/var/package
+magento/var/package/*
+!magento/var/package/*.xml
 
