@@ -2,44 +2,44 @@
 # Magento Default Files    #
 #--------------------------#
 
-magento/PATCH_*.sh
+/magento/PATCH_*.sh
 
-magento/app/etc/local.xml
+/magento/app/etc/local.xml
 
-magento/media/*
-!magento/media/.htaccess
+/magento/media/*
+!/magento/media/.htaccess
 
-!magento/media/customer
-magento/media/customer/*
-!magento/media/customer/.htaccess
+!/magento/media/customer
+/magento/media/customer/*
+!/magento/media/customer/.htaccess
 
-!magento/media/dhl
-magento/media/dhl/*
-!magento/media/dhl/logo.jpg
+!/magento/media/dhl
+/magento/media/dhl/*
+!/magento/media/dhl/logo.jpg
 
-!magento/media/downloadable
-magento/media/downloadable/*
-!magento/media/downloadable/.htaccess
+!/magento/media/downloadable
+/magento/media/downloadable/*
+!/magento/media/downloadable/.htaccess
 
-!magento/media/xmlconnect
-magento/media/xmlconnect/*
+!/magento/media/xmlconnect
+/magento/media/xmlconnect/*
 
-!magento/media/xmlconnect/custom
-magento/media/xmlconnect/custom/*
-!magento/media/xmlconnect/custom/ok.gif
+!/magento/media/xmlconnect/custom
+/magento/media/xmlconnect/custom/*
+!/magento/media/xmlconnect/custom/ok.gif
 
-!magento/media/xmlconnect/original
-magento/media/xmlconnect/original/*
-!magento/media/xmlconnect/original/ok.gif
+!/magento/media/xmlconnect/original
+/magento/media/xmlconnect/original/*
+!/magento/media/xmlconnect/original/ok.gif
 
-!magento/media/xmlconnect/system
-magento/media/xmlconnect/system/*
-!magento/media/xmlconnect/system/ok.gif
+!/magento/media/xmlconnect/system
+/magento/media/xmlconnect/system/*
+!/magento/media/xmlconnect/system/ok.gif
 
-magento/var/*
-!magento/var/.htaccess
+/magento/var/*
+!/magento/var/.htaccess
 
-!magento/var/package
-magento/var/package/*
-!magento/var/package/*.xml
+!/magento/var/package
+/magento/var/package/*
+!/magento/var/package/*.xml
 
