@@ -10,7 +10,7 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
-        $this->setUseAjax(true);
+        //$this->setUseAjax(true);
         $this->setVarNameFilter('seller_filter');
     }
 
@@ -64,9 +64,8 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
             'inner',
             $adminStore
         );
-        $this->setCollection($collection);
-        parent::_prepareCollection();
-        return $this;
+        $this->setCollection($collection);;
+        return parent::_prepareCollection();
     }
 
     protected function _prepareColumns()
@@ -133,7 +132,7 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
 
     public function getGridUrl()
     {
-        return $this->getUrl('*/*/grid', array('_current' => true));
+        return $this->getUrl('*/*/index', array('_current' => true));
     }
 
     public function getRowUrl($row)
