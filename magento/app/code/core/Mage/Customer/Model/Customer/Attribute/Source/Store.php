@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magento
  *
@@ -33,7 +34,7 @@
  */
 class Mage_Customer_Model_Customer_Attribute_Source_Store extends Mage_Eav_Model_Entity_Attribute_Source_Table
 {
-    public function getAllOptions()
+    public function getAllOptions($withEmpty = true, $defaultValues = false)
     {
         if (!$this->_options) {
             $collection = Mage::getResourceModel('core/store_collection');
@@ -50,7 +51,7 @@ class Mage_Customer_Model_Customer_Attribute_Source_Store extends Mage_Eav_Model
 
     public function getOptionText($value)
     {
-        if(!$value)$value ='0';
+        if (!$value) $value = '0';
         $isMultiple = false;
         if (strpos($value, ',')) {
             $isMultiple = true;
@@ -74,8 +75,7 @@ class Mage_Customer_Model_Customer_Attribute_Source_Store extends Mage_Eav_Model
                 $values[] = $this->_options[$val];
             }
             return $values;
-        }
-        else {
+        } else {
             return $this->_options[$value];
         }
         return false;
