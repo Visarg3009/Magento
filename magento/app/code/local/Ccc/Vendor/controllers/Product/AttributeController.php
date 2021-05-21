@@ -270,6 +270,7 @@ class Ccc_Vendor_Product_AttributeController extends Mage_Core_Controller_Front_
                 $model->setAttributeCode($vendor->getId() . '_' . $attribute_code);
             }
 
+
             try {
                 $model->save();
                 $session->addSuccess(
