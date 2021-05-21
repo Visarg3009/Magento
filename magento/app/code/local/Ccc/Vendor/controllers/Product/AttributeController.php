@@ -264,12 +264,13 @@ class Ccc_Vendor_Product_AttributeController extends Mage_Core_Controller_Front_
                 $model->setAttributeSetId($this->getRequest()->getParam('set'));
                 $model->setAttributeGroupId($this->getRequest()->getParam('group'));
             }
+            $attributeDefaultSetId = Mage::getModel('vendor/product')->getResource()->getEntityType()->getDefaultAttributeSetId();
+            $model->setAttributeSetId($attributeDefaultSetId);
 
             if (!$id) {
                 $attribute_code = $model->getAttributeCode();
                 $model->setAttributeCode($vendor->getId() . '_' . $attribute_code);
             }
-
 
             try {
                 $model->save();
