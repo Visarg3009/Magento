@@ -78,7 +78,6 @@ class Ccc_Vendor_AccountController extends Mage_Core_Controller_Front_Action
     {
         $this->loadLayout();
         $this->_initLayoutMessages('vendor/session');
-        // $this->_initLayoutMessages('venodr/session');
 
         $this->getLayout()->getBlock('content')->append(
             $this->getLayout()->createBlock('vendor/account_dashboard')
@@ -129,10 +128,10 @@ class Ccc_Vendor_AccountController extends Mage_Core_Controller_Front_Action
                     // }
                 } catch (Mage_Core_Exception $e) {
                     switch ($e->getCode()) {
-                        case Ccc_Vendor_Model_Vendor::EXCEPTION_EMAIL_NOT_CONFIRMED:
-                            $value = $this->_getHelper('vendor')->getEmailConfirmationUrl($login['username']);
-                            $message = $this->_getHelper('vendor')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
-                            break;
+                            // case Ccc_Vendor_Model_Vendor::EXCEPTION_EMAIL_NOT_CONFIRMED:
+                            //     $value = $this->_getHelper('vendor')->getEmailConfirmationUrl($login['username']);
+                            //     $message = $this->_getHelper('vendor')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
+                            //     break;
                         case Ccc_Vendor_Model_Vendor::EXCEPTION_INVALID_EMAIL_OR_PASSWORD:
                             $message = $e->getMessage();
                             break;
@@ -302,27 +301,28 @@ class Ccc_Vendor_AccountController extends Mage_Core_Controller_Front_Action
     protected function _successProcessRegistration(Ccc_Vendor_Model_Vendor $vendor)
     {
         $session = $this->_getSession();
-        if ($vendor->isConfirmationRequired()) {
-            /** @var $app Mage_Core_Model_App */
-            $app = $this->_getApp();
-            /** @var $store  Mage_Core_Model_Store*/
-            $store = $app->getStore();
-            $vendor->sendNewAccountEmail(
-                'confirmation',
-                $session->getBeforeAuthUrl(),
-                $store->getId(),
-                $this->getRequest()->getPost('password')
-            );
-            $vendorHelper = $this->_getHelper('vendor');
-            $session->addSuccess($this->__(
-                'Account confirmation is required. Please, check your email for the confirmation link. To resend the confirmation email please <a href="%s">click here</a>.',
-                $vendorHelper->getEmailConfirmationUrl($vendor->getEmail())
-            ));
-            $url = $this->_getUrl('*/*/index', array('_secure' => true));
-        } else {
-            $session->setVendorAsLoggedIn($vendor);
-            $url = $this->_welcomeVendor($vendor);
-        }
+        // if ($vendor->isConfirmationRequired()) {
+        //     /** @var $app Mage_Core_Model_App */
+        //     $app = $this->_getApp();
+        //     /** @var $store  Mage_Core_Model_Store*/
+        //     $store = $app->getStore();
+        //     $vendor->sendNewAccountEmail(
+        //         'confirmation',
+        //         $session->getBeforeAuthUrl(),
+        //         $store->getId(),
+        //         $this->getRequest()->getPost('password')
+        //     );
+        //     $vendorHelper = $this->_getHelper('vendor');
+        //     // $session->addSuccess($this->__(
+        //     //     'Account confirmation is required. Please, check your email for the confirmation link. To resend the confirmation email please <a href="%s">click here</a>.',
+        //     //     $vendorHelper->getEmailConfirmationUrl($vendor->getEmail())
+        //     // ));
+        //     $url = $this->_getUrl('*/*/index', array('_secure' => true));
+        // } else {
+
+        // }
+        $session->setVendorAsLoggedIn($vendor);
+        $url = $this->_welcomeVendor($vendor);
         $this->_redirectSuccess($url);
         return $this;
     }
@@ -548,12 +548,12 @@ class Ccc_Vendor_AccountController extends Mage_Core_Controller_Front_Action
         //     $this->_getSession()->addSuccess($userPrompt);
         // }
 
-        $vendor->sendNewAccountEmail(
-            $isJustConfirmed ? 'confirmed' : 'registered',
-            '',
-            Mage::app()->getStore()->getId(),
-            $this->getRequest()->getPost('password')
-        );
+        // $vendor->sendNewAccountEmail(
+        //     $isJustConfirmed ? 'confirmed' : 'registered',
+        //     '',
+        //     Mage::app()->getStore()->getId(),
+        //     $this->getRequest()->getPost('password')
+        // );
 
         $successUrl = $this->_getUrl('*/*/index', array('_secure' => true));
         if ($this->_getSession()->getBeforeAuthUrl()) {
@@ -633,33 +633,33 @@ class Ccc_Vendor_AccountController extends Mage_Core_Controller_Front_Action
         }
 
         // try to confirm by email
-        $email = $this->getRequest()->getPost('email');
-        if ($email) {
-            try {
-                $vendor->setWebsiteId(Mage::app()->getStore()->getWebsiteId())->loadByEmail($email);
-                if (!$vendor->getId()) {
-                    throw new Exception('');
-                }
-                if ($vendor->getConfirmation()) {
-                    $vendor->sendNewAccountEmail('confirmation', '', Mage::app()->getStore()->getId());
-                    $this->_getSession()->addSuccess($this->__('Please, check your email for confirmation key.'));
-                } else {
-                    $this->_getSession()->addSuccess($this->__('This email does not require confirmation.'));
-                }
-                $this->_getSession()->setUsername($email);
-                $this->_redirectSuccess($this->_getUrl('*/*/index', array('_secure' => true)));
-            } catch (Exception $e) {
-                $this->_getSession()->addException($e, $this->__('Wrong email.'));
-                $this->_redirectError($this->_getUrl('*/*/*', array('email' => $email, '_secure' => true)));
-            }
-            return;
-        }
+        // $email = $this->getRequest()->getPost('email');
+        // if ($email) {
+        //     try {
+        //         $vendor->setWebsiteId(Mage::app()->getStore()->getWebsiteId())->loadByEmail($email);
+        //         if (!$vendor->getId()) {
+        //             throw new Exception('');
+        //         }
+        //         if ($vendor->getConfirmation()) {
+        //             $vendor->sendNewAccountEmail('confirmation', '', Mage::app()->getStore()->getId());
+        //             $this->_getSession()->addSuccess($this->__('Please, check your email for confirmation key.'));
+        //         } else {
+        //             $this->_getSession()->addSuccess($this->__('This email does not require confirmation.'));
+        //         }
+        //         $this->_getSession()->setUsername($email);
+        //         $this->_redirectSuccess($this->_getUrl('*/*/index', array('_secure' => true)));
+        //     } catch (Exception $e) {
+        //         $this->_getSession()->addException($e, $this->__('Wrong email.'));
+        //         $this->_redirectError($this->_getUrl('*/*/*', array('email' => $email, '_secure' => true)));
+        //     }
+        //     return;
+        // }
 
         // output form
         $this->loadLayout();
 
-        $this->getLayout()->getBlock('accountConfirmation')
-            ->setEmail($this->getRequest()->getParam('email', $email));
+        // $this->getLayout()->getBlock('accountConfirmation')
+        //     ->setEmail($this->getRequest()->getParam('email', $email));
 
         $this->_initLayoutMessages('vendor/session');
         $this->renderLayout();
