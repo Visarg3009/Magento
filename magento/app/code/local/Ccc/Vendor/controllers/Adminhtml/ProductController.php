@@ -128,7 +128,7 @@ class Ccc_Vendor_AdminHtml_ProductController extends Mage_Adminhtml_Controller_A
             }
             $productRequestModel = Mage::getResourceModel('vendor/product_request_collection')->addFieldToFilter('product_id', array('eq', $product->getId()))->load()->getLastItem();
 
-            if ($productRequestModel->getRequestType() == 'Deleted' && $productRequestModel->getApproveStatus() == 'Approved') {
+            if ($productRequestModel->getRequestType() == 'Deleted') {
                 $this->_forward('deleteRequest');
                 return;
             }

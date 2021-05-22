@@ -177,18 +177,22 @@ class Ccc_Vendor_ProductController extends Mage_Core_Controller_Front_Action
             if (!$productModel->load($productId)) {
                 throw new Exception('product does not exist');
             }
-            $productRequestModel = Mage::getResourceModel('vendor/product_request_collection')->addFieldToFilter('product_id', array('eq', $productModel->getId()))->load()->getLastItem();
-
-            if ($productRequestModel->getApproveStatus() != "Approved") {
-                $this->_getSession()->addError(Mage::helper('vendor')->__('The product is not approved yet.'));
-                $this->_redirect('*/*/');
-                return;
+            if (!$productModel->delete()) {
+                throw new Exception('Error in delete record', 1);
             }
 
-            $productRequestModel->setRequestType('Deleted');
-            $productRequestModel->setApproveStatus('Pending');
-            $productRequestModel->setCreatedAt($productModel->getCreatedAt());
-            $productRequestModel->save();
+            // $productRequestModel = Mage::getResourceModel('vendor/product_request_collection')->addFieldToFilter('product_id', array('eq', $productModel->getId()))->load()->getLastItem();
+
+            // // if ($productRequestModel->getApproveStatus() != "Approved") {
+            // //     $this->_getSession()->addError(Mage::helper('vendor')->__('The product is not approved yet.'));
+            // //     $this->_redirect('*/*/');
+            // //     return;
+            // // }
+
+            // $productRequestModel->setRequestType('Deleted');
+            // $productRequestModel->setApproveStatus('Pending');
+            // $productRequestModel->setCreatedAt($productModel->getCreatedAt());
+            // $productRequestModel->save();
             Mage::getSingleton('core/session')->addSuccess($this->__('Delete request sent successfully.'));
         } catch (Exception $e) {
             Mage::logException($e);
