@@ -56,13 +56,13 @@ class Ccc_Vendor_ProductController extends Mage_Core_Controller_Front_Action
         }
 
         $productRequestModel = Mage::getResourceModel('vendor/product_request_collection')->addFieldToFilter('product_id', array('eq', $product->getId()))->load()->getLastItem();
-        if ($productRequestModel && $productRequestModel->getId()) {
-            if ($productRequestModel->getApproveStatus() != "Approved") {
-                $this->_getSession()->addError(Mage::helper('vendor')->__('The product is not approved yet.'));
-                $this->_redirect('*/*/');
-                return;
-            }
-        }
+        // if ($productRequestModel && $productRequestModel->getId()) {
+        //     if ($productRequestModel->getApproveStatus() != "Approved") {
+        //         $this->_getSession()->addError(Mage::helper('vendor')->__('The product is not approved yet.'));
+        //         $this->_redirect('*/*/');
+        //         return;
+        //     }
+        // }
 
         $this->loadLayout();
         $this->_initLayoutMessages('vendor/session');
