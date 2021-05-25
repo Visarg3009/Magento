@@ -43,7 +43,7 @@ class Ccc_Vendor_Block_Adminhtml_Product_Grid extends Mage_Adminhtml_Block_Widge
         $collection->getSelect()->join(
             array('vendor_product_request' => 'vendor_product_request'),
             'vendor_product_request.product_id = e.entity_id',
-            array('vendor_product_request.request_type', 'vendor_product_request.approve_status')
+            array('vendor_product_request.request_type', 'vendor_product_request.approve_status', 'vendor_product_request.catalog_product_id')
         );
 
 
@@ -86,6 +86,14 @@ class Ccc_Vendor_Block_Adminhtml_Product_Grid extends Mage_Adminhtml_Block_Widge
                 'header' => Mage::helper('vendor')->__('Vendor Id'),
                 'width'  => '50px',
                 'index'  => 'vendor_id',
+            )
+        );
+        $this->addColumn(
+            'catalog_product_id',
+            array(
+                'header' => Mage::helper('vendor')->__('Catalog Product Id'),
+                'width'  => '50px',
+                'index'  => 'catalog_product_id',
             )
         );
 

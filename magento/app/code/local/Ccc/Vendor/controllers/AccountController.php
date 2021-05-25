@@ -1000,6 +1000,7 @@ class Ccc_Vendor_AccountController extends Mage_Core_Controller_Front_Action
                 $vendor->setfirstname($data['firstname']);
                 $vendor->setmiddlename($data['middlename']);
                 $vendor->setlastname($data['lastname']);
+                $vendor->setEmail($data['email']);
                 $vendor->save();
 
                 $this->_getSession()->setVendor($vendor)
