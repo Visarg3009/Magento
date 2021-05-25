@@ -185,8 +185,6 @@
                 <block type="vendor/account_dashboard_hello" name="vendor_account_dashboard_hello" as="hello" template="vendor/account/dashboard/hello.phtml"/>
                 <block type="core/template" name="vendor_account_dashboard_top" as="top" />
                 <block type="vendor/account_dashboard_info" name="vendor_account_dashboard_info" as="info" template="vendor/account/dashboard/info.phtml"/>
-                <block type="vendor/account_dashboard_newsletter" name="vendor_account_dashboard_newsletter" as="newsletter" template="vendor/account/dashboard/newsletter.phtml"/>
-                <block type="vendor/account_dashboard_address" name="vendor_account_dashboard_address" as="address" template="vendor/account/dashboard/address.phtml"/>
             </block>
         </reference>
     </vendor_account_index>
