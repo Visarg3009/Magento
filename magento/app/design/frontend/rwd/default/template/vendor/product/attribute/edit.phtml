@@ -118,18 +118,20 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="label"><label for="attribute_group_id">Select Group</label></td>
-                                        <td class="value">
-                                            <select id="attribute_group_id" name="attribute_group_id" title="Input Validation for Store Owner" class="attributedata select">
-                                                <?php if ($this->getAttributeGroups()) : ?>
-                                                    <?php foreach ($this->getAttributeGroups() as $group) : ?>
-                                                        <option value="<?php echo $group['attribute_group_id'] ?>"><?php echo $group['attribute_group_name'] ?></option>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
-                                            </select>
-                                        </td>
-                                    </tr>
+                                    <?php if ($attributeData['attribute_id']) : ?>
+                                        <tr>
+                                            <td class="label"><label for="attribute_group_id">Select Group</label></td>
+                                            <td class="value">
+                                                <select id="attribute_group_id" name="attribute_group_id" title="Input Validation for Store Owner" class="attributedata select">
+                                                    <?php if ($this->getAttributeGroups()) : ?>
+                                                        <?php foreach ($this->getAttributeGroups() as $group) : ?>
+                                                            <option value="<?php echo $group['attribute_group_id'] ?>"><?php echo $group['attribute_group_name'] ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
