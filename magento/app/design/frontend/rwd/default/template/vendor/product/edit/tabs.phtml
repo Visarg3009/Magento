@@ -1,0 +1,12 @@
+<?php $groups = $this->getGroups(); ?>
+<?php foreach ($groups as $group) : ?>
+    <div class="tab">
+        <button class="tablinks button" id="<?php echo $group->getAttributeGroupId(); ?>" onclick="openCity(event, '<?php echo $group->getAttributeGroupId(); ?>')"><?php echo $group->getAttributeGroupName() ?></button><br><br>
+    </div>
+<?php endforeach; ?>
+
+<style>
+    .tablinks {
+        width: 80%;
+    }
+</style>
