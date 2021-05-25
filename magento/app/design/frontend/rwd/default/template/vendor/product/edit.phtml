@@ -1,9 +1,9 @@
 <?php $groupCollection = $this->getGroups(); ?>
 <?php echo $this->getMessagesBlock()->toHtml(); ?>
 <?php $product = $this->getProduct(); ?>
-<form action="<?php echo $this->getSaveUrl(); ?>" method="post">
+<form id="productForm" action="<?php echo $this->getSaveUrl(); ?>" method="post">
 
-    <p class="form-buttons"><button id="" title="Back" type="button" class="scalable back button" onclick="setLocation('<?php echo $this->getBackUrl(); ?>')"><span><span><span>Back</span></span></span></button><button id="id_52db7b617f25eaaf05842dc36f56bf6a" title="Reset" type="button" class="scalable button" onclick="setLocation(window.location.href)"><span><span><span>Reset</span></span></span></button><button id="id_294b29a02f6773bca60ceced7bed42e2" title="Save" type="submit" class="scalable save button"><span><span><span>Save</span></span></span></button><?php if (array_key_exists('attribute_id', $attributeData)) : ?><button id="id_294b29a02f6773bca60ceced7bed42e2" title="Save" type="button" onclick="setLocation('<?php echo $this->getDeleteUrl(); ?>')" class="scalable save button"><span><span><span>Delete</span></span></span></button><?php endif; ?></p>
+    <p class="form-buttons"><button id="" title="Back" type="button" class="scalable back button" onclick="setLocation('<?php echo $this->getBackUrl(); ?>')"><span><span><span>Back</span></span></span></button><button id="id_52db7b617f25eaaf05842dc36f56bf6a" title="Reset" type="button" class="scalable button" onclick="setLocation(window.location.href)"><span><span><span>Reset</span></span></span></button><button id="id_294b29a02f6773bca60ceced7bed42e2" title="Save" type="button" onclick="return checkDetails()" class="scalable save button"><span><span><span>Save</span></span></span></button><?php if (array_key_exists('attribute_id', $attributeData)) : ?><button id="id_294b29a02f6773bca60ceced7bed42e2" title="Save" type="button" onclick="setLocation('<?php echo $this->getDeleteUrl(); ?>')" class="scalable save button"><span><span><span>Delete</span></span></span></button><?php endif; ?></p>
     <?php foreach ($groupCollection as $group) : ?>
         <div id="<?php echo $group->getAttributeGroupId(); ?>" class="tabcontent">
             <?php $attributes = $this->getGroupAttributes($group); ?>
@@ -28,7 +28,7 @@
                             <td>
                                 <?php switch ($attribute->getFrontendInput()):
                                     case 'select': ?>
-                                        <select class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <select class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" <?php if ($attribute->getIsRequired()) : ?> required id="required" <?php endif; ?>>
                                             <?php if ($attribute->getData()['is_user_defined']) : ?>
                                                 <?php foreach ($this->getOptionValues($attribute, 'select') as $_value) : ?>
                                                     <option value="<?php echo $_value->getId(); ?>" <?php if ($this->getValue($attribute) == $_value->getId()) : ?> selected <?php endif; ?>><?php echo $_value->getValue() ?></option>
@@ -45,28 +45,28 @@
                                         </select>
                                     <?php
                                     case 'text': ?>
-                                        <input type="text" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <input type="text" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required id="required" <?php endif; ?>>
                                         <?php break; ?>
 
                                     <?php
                                     case 'date': ?>
-                                        <input type="date" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <input type="date" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required id="required" <?php endif; ?>>
                                         <?php break; ?>
 
                                     <?php
                                     case 'price':
                                     case 'weight': ?>
-                                        <input type="text" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <input type="text" class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>]" value="<?php echo $this->getValue($attribute); ?>" <?php if ($attribute->getIsRequired()) : ?> required id="required" <?php endif; ?>>
                                         <?php break; ?>
 
                                     <?php
                                     case 'textarea': ?>
-                                        <textarea name="product[<?php echo $attribute->getAttributeCode() ?>]" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>><?php echo $this->getValue($attribute); ?></textarea>
+                                        <textarea name="product[<?php echo $attribute->getAttributeCode() ?>]" <?php if ($attribute->getIsRequired()) : ?> required id="required" <?php endif; ?>><?php echo $this->getValue($attribute); ?></textarea>
                                         <?php break; ?>
 
                                     <?php
                                     case 'multiselect': ?>
-                                        <select multiple class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>][]" <?php if ($attribute->getIsRequired()) : ?> required <?php endif; ?>>
+                                        <select multiple class="form-control" name="product[<?php echo $attribute->getAttributeCode() ?>][]" <?php if ($attribute->getIsRequired()) : ?> required id="required" <?php endif; ?>>
                                             <?php $array = explode(',', $this->getValue($attribute)); ?>
                                             <?php foreach ($this->getOptionValues($attribute, 'multiselect') as $_value) : ?>
                                                 <option value="<?php echo $_value->getId(); ?>" <?php if (in_array($_value->getId(), $array)) : ?> selected <?php endif; ?>><?php echo $_value->getValue(); ?></option>
@@ -98,6 +98,26 @@
         evt.currentTarget.className += " active";
     }
     document.getElementById("30").click();
+
+    function checkDetails() {
+        flag = 0;
+        jQuery("input,select,textarea").each(function() {
+            if (jQuery(this).attr("id") == 'required') {
+                if (jQuery(this).val() == "" || jQuery(this).val() == undefined) {
+                    //ptag = jQuery(this).parent().prev().children()[0];
+                    ptag = jQuery(this).parent().prev();
+                    alert("Please Fill " + jQuery(ptag).text().trim() + " value");
+                    flag = 1;
+                    return false;
+                }
+            }
+        });
+        if (flag) {
+            return false;
+        } else {
+            jQuery("#productForm").submit();
+        }
+    }
 </script>
 
 <style>

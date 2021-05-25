@@ -132,7 +132,7 @@ class Ccc_Vendor_AdminHtml_ProductController extends Mage_Adminhtml_Controller_A
                 $this->_forward('deleteRequest');
                 return;
             }
-            if ($productRequestModel->getRequestType() == 'Edited') {
+            if ($productRequestModel->getRequestType() == 'Edited' && $productRequestModel->getApproveStatus() == 'Approved') {
                 $this->_forward('editRequest');
                 return;
             }
