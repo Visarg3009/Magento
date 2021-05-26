@@ -1,51 +1,54 @@
 <?php
 
-class Ccc_Vendor_Adminhtml_Vendor_setController extends Mage_Adminhtml_Controller_Action
+class Ccc_Vendor_Adminhtml_Vendor_SetController extends Mage_Adminhtml_Controller_Action
 {
 
-	protected function _setTypeId()
+    protected function _setTypeId()
     {
-        Mage::register('entityType',
-            Mage::getModel('vendor/vendor')->getResource()->getTypeId());
+        Mage::register(
+            'entityType',
+            Mage::getModel('vendor/vendor')->getResource()->getTypeId()
+        );
     }
 
-    
+
     public function preDispatch()
     {
         //$this->_setForcedFormKeyActions('delete');
         return parent::preDispatch();
     }
 
-	public function indexAction()
-	{
-		$this->_title($this->__('Vendor'))
-             ->_title($this->__('Attributes'))
-             ->_title($this->__('Manage Attribute Sets'));
+    public function indexAction()
+    {
+        $this->_title($this->__('Vendor'))
+            ->_title($this->__('Attributes'))
+            ->_title($this->__('Manage Attribute Sets'));
 
         $this->_setTypeId();
 
         $this->loadLayout();
         $this->_setActiveMenu('vendor');
-        
+
 
         $this->_addBreadcrumb(Mage::helper('vendor')->__('Vendor'), Mage::helper('vendor')->__('Vendor'));
         $this->_addBreadcrumb(
             Mage::helper('vendor')->__('Manage vendor Sets'),
-            Mage::helper('vendor')->__('Manage vendor Sets'));
+            Mage::helper('vendor')->__('Manage vendor Sets')
+        );
 
         $this->_addContent($this->getLayout()->createBlock('vendor/adminhtml_vendor_attribute_set_toolbar_main'));
-      
+
         $this->_addContent($this->getLayout()->createBlock('vendor/adminhtml_vendor_attribute_set_grid'));
 
         $this->renderLayout();
-	}
+    }
 
-	public function addAction()
+    public function addAction()
     {
         $this->_title($this->__('Vendor'))
-             ->_title($this->__('Attributes'))
-             ->_title($this->__('Manage Vendor Attribute Sets'))
-             ->_title($this->__('New Set'));
+            ->_title($this->__('Attributes'))
+            ->_title($this->__('Manage Vendor Attribute Sets'))
+            ->_title($this->__('New Set'));
 
         $this->_setTypeId();
 
@@ -60,8 +63,8 @@ class Ccc_Vendor_Adminhtml_Vendor_setController extends Mage_Adminhtml_Controlle
     public function editAction()
     {
         $this->_title($this->__('Vendor'))
-             ->_title($this->__('Attributes'))
-             ->_title($this->__('Manage Attribute Sets'));
+            ->_title($this->__('Attributes'))
+            ->_title($this->__('Manage Attribute Sets'));
 
         $this->_setTypeId();
         $attributeSet = Mage::getModel('eav/entity_attribute_set')
@@ -78,13 +81,14 @@ class Ccc_Vendor_Adminhtml_Vendor_setController extends Mage_Adminhtml_Controlle
 
         $this->loadLayout();
         $this->_setActiveMenu('vendor');
-       
+
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 
         $this->_addBreadcrumb(Mage::helper('vendor')->__('vendor'), Mage::helper('vendor')->__('vendor'));
         $this->_addBreadcrumb(
             Mage::helper('vendor')->__('Manage Vendor Attribute Sets'),
-            Mage::helper('vendor')->__('Manage Vendor Attribute Sets'));
+            Mage::helper('vendor')->__('Manage Vendor Attribute Sets')
+        );
 
         $this->_addContent($this->getLayout()->createBlock('vendor/adminhtml_vendor_attribute_set_main'));
 
@@ -144,8 +148,10 @@ class Ccc_Vendor_Adminhtml_Vendor_setController extends Mage_Adminhtml_Controlle
             $this->_getSession()->addError($e->getMessage());
             $hasError = true;
         } catch (Exception $e) {
-            $this->_getSession()->addException($e,
-                Mage::helper('vendor')->__('An error occurred while saving the attribute set.'));
+            $this->_getSession()->addException(
+                $e,
+                Mage::helper('vendor')->__('An error occurred while saving the attribute set.')
+            );
             $hasError = true;
         }
 
@@ -184,6 +190,4 @@ class Ccc_Vendor_Adminhtml_Vendor_setController extends Mage_Adminhtml_Controlle
             $this->_redirectReferer();
         }
     }
-
-
 }
