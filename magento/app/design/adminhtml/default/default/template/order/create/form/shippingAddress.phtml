@@ -1,0 +1,33 @@
+<div class="entry-edit">
+    <form id="shippingform" action="<?php echo $this->getUrl('*/adminhtml_order_create/saveShippingAddress'); ?>" method="post">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="entry-edit-head">
+            <div style="float: right;"><button title="Save" type="submit" class="scalable save"><span><span><span>Save</span></span></span></button></div>
+            <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+        </div>
+        <div class="fieldset">
+            <?php echo $this->getChildHtml('shippingAddressForm', true, true) ?>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function disabledFields(box) {
+        if (box.checked == true) {
+            document.getElementById("shipping_name").disabled = true;
+            document.getElementById("shipping_address").disabled = true;
+            document.getElementById("shipping_city").disabled = true;
+            document.getElementById("shipping_state").disabled = true;
+            document.getElementById("shipping_zipcode").disabled = true;
+            document.getElementById("shipping_country_id").disabled = true;
+        } else {
+            document.getElementById("shipping_name").disabled = false;
+            document.getElementById("shipping_address").disabled = false;
+            document.getElementById("shipping_city").disabled = false;
+            document.getElementById("shipping_state").disabled = false;
+            document.getElementById("shipping_zipcode").disabled = false;
+            document.getElementById("shipping_country_id").disabled = false;
+        }
+    }
+    disabledFields(document.getElementById("save-in-shipping-address-book"));
+</script>

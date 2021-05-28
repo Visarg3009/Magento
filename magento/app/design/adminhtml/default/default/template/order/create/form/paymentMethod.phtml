@@ -1,0 +1,12 @@
+<div class="entry-edit">
+    <form id="paymentForm" method="post" action="<?php echo $this->getUrl('*/adminhtml_order_create/savePayment') ?>">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="entry-edit-head">
+            <div style="float: right;"><button type="submit" form="paymentForm">Save</button></div>
+            <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+        </div>
+        <div>
+            <?php echo $this->getChildHtml('paymentMethodGrid'); ?>
+        </div>
+    </form>
+</div>

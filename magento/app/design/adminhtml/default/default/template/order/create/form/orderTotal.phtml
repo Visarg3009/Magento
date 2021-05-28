@@ -1,0 +1,39 @@
+<?php $cart = $this->getCart(); ?>
+<?php
+$grandTotal = 0.00 + $cart->getTotal();
+if ($cart->getShippingAmount()) {
+    $grandTotal += $cart->getShippingAmount();
+}
+$grandTotal = floatval($grandTotal);
+?>
+<div class="box-right entry-edit">
+    <div class="entry-edit-head">
+        <h4>Order Totals</h4>
+    </div>
+    <div id="order-totals" class="order-totals">
+        <table cellspacing="0" cellpadding="8" width="100%">
+            <tbody>
+                <tr>
+                    <td class="a-right" colspan="1">Subtotal </td>
+                    <td class="a-right">
+                        <span class="price"><?php if ($cart->getTotal()) : ?><?php echo "$" . $cart->getTotal() ?><?php else : ?><?php echo "$0.00" ?><?php endif; ?></span>
+                    </td>
+                </tr>
+                <?php if ($cart->getShippingMethodCode()) : ?>
+                    <tr>
+                        <td class="a-right" colspan="1">Shipping Method (<?php echo $cart->getShippingMethodCode() ?>) </td>
+                        <td class="a-right">
+                            <span class="price">$<?php echo $cart->getShippingAmount() ?></span>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+                <tr>
+                    <td class="a-right" colspan="1"><strong>Grand Total</strong></td>
+                    <td class="a-right">
+                        <strong><span class="price">$<?php echo $grandTotal; ?></span></strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

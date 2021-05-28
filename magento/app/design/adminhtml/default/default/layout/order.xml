@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<layout>
+    <order_adminhtml_order_index>
+        <reference name="content">
+            <block type="order/adminhtml_order" name="adminhtml_order"></block>
+        </reference>
+    </order_adminhtml_order_index>
+
+    <order_adminhtml_order_create_index>
+        <reference name="content">
+            <block type="order/adminhtml_order_create_customer" name="customer"></block>
+        </reference>
+    </order_adminhtml_order_create_index>
+
+    <order_adminhtml_order_create_new>
+        <reference name="head">
+            <action method="addJs">
+                <file>ccc/mage.js</file>
+            </action>
+        </reference>
+        <reference name="root">
+            <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="content">
+                <block type="order/adminhtml_order_create_form_product" template="order/create/form/product.phtml" name="product">
+                    <block type="order/adminhtml_order_create_form_product_grid" name="productGrid" />
+                </block>
+                <block type="order/adminhtml_order_create_form_orderItems" template="order/create/form/orderItems.phtml" name="orderItems">
+                    <block type="order/adminhtml_order_create_form_orderItems_grid" template="order/create/form/orderItems/grid.phtml" name="orderItemsGrid" />
+                </block>
+                <block type="order/adminhtml_order_create_form_accountInfo" template="order/create/form/accountInfo.phtml" name="accountInfo">
+                    <block type="order/adminhtml_order_create_form_accountInfo_form" template="order/create/form/accountInfo/form.phtml" name="accountInfoForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_billingAddress" template="order/create/form/billingAddress.phtml" name="billingAddress">
+                    <block type="order/adminhtml_order_create_form_billingAddress_form" template="order/create/form/billingAddress/form.phtml" name="billingAddressForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_shippingAddress" template="order/create/form/shippingAddress.phtml" name="shippingAddress">
+                    <block type="order/adminhtml_order_create_form_shippingAddress_form" template="order/create/form/shippingAddress/form.phtml" name="shippingAddressForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_paymentMethod" template="order/create/form/paymentMethod.phtml" name="paymentMethod">
+                    <block type="order/adminhtml_order_create_form_paymentMethod_grid" template="order/create/form/paymentMethod/grid.phtml" name="paymentMethodGrid" />
+                </block>
+                <block type="order/adminhtml_order_create_form_shipmentMethod" template="order/create/form/shipmentMethod.phtml" name="shipmentMethod">
+                    <block type="order/adminhtml_order_create_form_shipmentMethod_grid" template="order/create/form/shipmentMethod/grid.phtml" name="shipmentMethodGrid" />
+                </block>
+                <block type="order/adminhtml_order_create_form_orderTotal" template="order/create/form/orderTotal.phtml" name="orderTotal"></block>
+            </block>
+        </reference>
+    </order_adminhtml_order_create_new>
+</layout>

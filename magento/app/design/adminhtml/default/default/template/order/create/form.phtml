@@ -1,0 +1,35 @@
+<div style="float: right;"><button title="Submit Order" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order/placeOrder', ['_current' => true]) ?>')"><span><span><span>Submit Order</span></span></span></button></div>
+<h4><?php echo $this->getHeader() ?></h4>
+
+<div style="margin-top:10px;">
+    <?php echo $this->getChildHtml('product'); ?>
+</div>
+<div style="margin-top:20px;">
+    <?php echo $this->getChildHtml('orderItems'); ?>
+</div>
+<div style="margin-top:20px;">
+    <?php echo $this->getChildHtml('accountInfo'); ?>
+</div>
+<div style=" display: flex; margin-top:20px;">
+    <div style="width: 60%;">
+        <?php echo $this->getChildHtml('billingAddress'); ?>
+    </div>
+    <div style="margin-left:10px; width: 60%;">
+        <?php echo $this->getChildHtml('shippingAddress'); ?>
+    </div>
+</div>
+
+<div style="display: flex; margin-top:20px;">
+    <div style="width: 60%;">
+        <?php echo $this->getChildHtml('paymentMethod'); ?>
+    </div>
+    <div style="margin-left:10px; width: 60%;">
+        <?php echo $this->getChildHtml('shipmentMethod'); ?>
+    </div>
+</div>
+<div style="margin-top:20px;">
+    <?php echo $this->getChildHtml('orderTotal'); ?>
+</div>
+<script>
+    var base = new Base();
+</script>

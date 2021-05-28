@@ -1,0 +1,15 @@
+<div class="entry-edit">
+    <form method="post" id="cartform" action="<?php echo $this->getUrl('*/adminhtml_order_create/updateCart'); ?>">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="entry-edit-head">
+            <div style="float: right;">
+                <!-- <a href="" class="btn btn-primary">Update Cart</a> -->
+                <button type="submit" form="cartform"><span>Update Cart</span></button>
+            </div>
+            <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+        </div>
+        <div>
+            <?php echo $this->getChildHtml('orderItemsGrid'); ?>
+        </div>
+    </form>
+</div>
