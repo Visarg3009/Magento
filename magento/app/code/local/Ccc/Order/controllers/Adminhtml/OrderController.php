@@ -1,22 +1,6 @@
 <?php
 class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Action
 {
-    protected function _initOrder()
-    {
-        $id = $this->getRequest()->getParam('order_id');
-        $order = Mage::getModel('order/order')->load($id);
-
-        if (!$order->getId()) {
-            $this->_getSession()->addError($this->__('This order no longer exists.'));
-            $this->_redirect('*/*/');
-            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
-            return false;
-        }
-        Mage::register('order', $order);
-        Mage::register('current_order', $order);
-        return $order;
-    }
-
     public function indexAction()
     {
         $this->loadLayout()
@@ -30,6 +14,20 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
         $this->getResponse()->setBody($this->getLayout()->createBlock('order/adminhtml_order_grid')->toHtml());
     }
 
+    public function getCart()
+    {
+        $customerId = $this->getRequest()->getParam('customer_id');
+        $customer = Mage::getModel('customer/customer')->load($customerId);
+        if (!$customer->getId()) {
+            throw new Exception("Invalid Customer");
+        }
+
+        $cart = Mage::getModel('order/cart')->load($customerId, 'customer_id');
+        if (!$cart->getData()) {
+            throw new Exception("No Cart Found!");
+        }
+        return $cart;
+    }
 
     public function placeOrderAction()
     {
@@ -38,10 +36,10 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
             if ($cart->getTotal() == 0) {
                 throw new Exception("No Items Avaiable in your Cart");
             }
-            if (!$cart->getBillingAddress($cart->getId(), $cart->getCustomerId())->getState()) {
+            if (!$cart->getBillingAddress()->getData()) {
                 throw new Exception("Please Enter Billing Address");
             }
-            if (!$cart->getShippingAddress($cart->getId(), $cart->getCustomerId())->getState()) {
+            if (!$cart->getShippingAddress()->getData()) {
                 throw new Exception("Please Enter Shipping Address");
             }
             if (!$cart->getPaymentMethodCode()) {
@@ -61,33 +59,16 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
         $this->_redirect('*/*/');
     }
 
-    public function getCart()
-    {
-        $cart = $this->_getSession()->getData('order_cart');
-        $cartId = $cart->getId();
-        $cart = Mage::getModel('order/cart');
-        if ($cartId) {
-            $cart = $cart->load($cartId);
-            if (!$cart) {
-                throw new \Exception("No Cart Found!");
-            }
-        }
-        if (!$cart) {
-            return false;
-        }
-        return $cart;
-    }
-
     public function saveOrder()
     {
         $cart = $this->getCart();
-        $customer = Mage::getModel('customer/customer')->load($cart->getCustomerId());
         $order = Mage::getModel('order/order');
         $order->setCustomerId($cart->getCustomerId());
-        $order->setCustomerEmail($customer->getEmail());
+        $order->setCustomerEmail($cart->getEmail());
         $order->setDiscount($cart->getDiscount());
         $order->setTotal($cart->getTotal());
         $order->setCustomerName($cart->getCustomerName());
+        $order->setCustomerEmail($cart->getCustomerEmail());
         $order->setPaymentMethodCode($cart->getPaymentMethodCode());
         $order->setShippingMethodCode($cart->getShippingMethodCode());
         $order->setShippingAmount($cart->getShippingAmount());
@@ -100,8 +81,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
 
     public function saveOrderItem($order)
     {
-        $cartId = $this->getCart()->getId();
-        $cartItems = Mage::getModel('order/cart_item')->getCollection()->addFieldToFilter('cart_id', ['eq' => $cartId]);
+        $cartItems = $this->getCart()->getItems();
 
         foreach ($cartItems as $cartItem) {
             $orderItem = Mage::getModel('order/order_item');
@@ -118,8 +98,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
 
     public function saveOrderAddresses($order)
     {
-        $cartId = $this->getCart()->getId();
-        $cartAddresses = Mage::getModel('order/cart_address')->getCollection()->addFieldToFilter('cart_id', ['eq' => $cartId]);
+        $cartAddresses = $this->getCart()->getAddresses();
 
         foreach ($cartAddresses as $cartAddress) {
             $orderAddress = Mage::getModel('order/order_address');
@@ -139,17 +118,14 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
     public function deleteCart()
     {
         $cart = $this->getCart();
-        $cartItems = Mage::getModel('order/cart_item')->getCollection()->addFieldToFilter('cart_id', ['eq' => $cart->getId()]);
+        $cartItems = $cart->getItems();
         foreach ($cartItems as $cartItem) {
-            $item = Mage::getModel('order/cart_item');
-            $item->delete($cartItem->getId());
+            $cartItem->delete();
         }
-
-        $cartAddresses = Mage::getModel('order/cart_address')->getCollection()->addFieldToFilter('cart_id', ['eq' => $cart->getId()]);
+        $cartAddresses = $cart->getAddresses();
         foreach ($cartAddresses as $cartAddress) {
-            $address = Mage::getModel('order/cart_address');
-            $address->delete($cartAddress->getId());
+            $cartAddress->delete();
         }
-        $cart->delete($cart->getId());
+        $cart->delete();
     }
 }

@@ -18,8 +18,8 @@
                 <file>ccc/mage.js</file>
             </action>
         </reference>
-        <reference name="root">
-            <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="content">
+        <reference name="content">
+            <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="main">
                 <block type="order/adminhtml_order_create_form_product" template="order/create/form/product.phtml" name="product">
                     <block type="order/adminhtml_order_create_form_product_grid" name="productGrid" />
                 </block>

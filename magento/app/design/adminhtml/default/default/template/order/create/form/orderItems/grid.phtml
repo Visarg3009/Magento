@@ -21,7 +21,7 @@ $columns = $this->getColumns();
             </thead>
 
             <tbody>
-                <?php if ($collection) : ?>
+                <?php if ($collection->getData()) : ?>
                     <?php foreach ($collection as $row) : ?>
 
                         <tr title="#">
@@ -32,12 +32,12 @@ $columns = $this->getColumns();
                             <td class=" "> <input type="number" step="any" min="0" name="data[<?php echo $row->getId() ?>][price]" value="<?php echo $row->getPrice() ?>" required class="input-text"> </td>
                             <td class="a-center "><input type="number" min="0" name="data[<?php echo $row->getId() ?>][quantity]" value="<?php echo $row->getQuantity() ?>" required class="input-text"></td>
                             <td class=" "> <?php echo $row->getPrice() * $row->getQuantity() ?> </td>
-                            <td class=" "><button title="Delete" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order_create/deleteItem', ['item_id' => $row->getId()]) ?>')"><span>Delete</span></button></td>
+                            <td class=" "><button title="Delete" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order_create/deleteItem', ['_current' => true, 'item_id' => $row->getId()]) ?>')"><span>Delete</span></button></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr title="#">
-                        <td colspan="6">No Records Found!</td>
+                        <td colspan="8">No Records Found!</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

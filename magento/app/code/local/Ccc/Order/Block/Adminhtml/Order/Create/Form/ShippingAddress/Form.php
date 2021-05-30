@@ -1,6 +1,8 @@
 <?php
 class Ccc_Order_Block_Adminhtml_Order_Create_Form_ShippingAddress_Form extends Mage_Adminhtml_Block_Widget_Form
 {
+    protected $cart = null;
+    protected $shippingAddress = null;
 
     protected function _prepareForm()
     {
@@ -53,13 +55,58 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_ShippingAddress_Form extends M
         return parent::_prepareForm();
     }
 
-    public function getShippingAddress()
-    {
-        return Mage::registry('shipping_data');
-    }
-
     public function getCountryOptions()
     {
         return Mage::getModel('adminhtml/system_config_source_country')->toOptionArray();
+    }
+
+    public function setCart(Ccc_Order_Model_Cart $cart)
+    {
+        $this->cart = $cart;
+        return $this;
+    }
+
+    public function getCart()
+    {
+        if (!$this->cart) {
+            Mage::throwException(Mage::helper('order')->__('Cart Is not set.'));
+        }
+        return $this->cart;
+    }
+
+    public function setShippingAddress($shippingAddress = null)
+    {
+        $address = $this->getCart()->getShippingAddress();
+        if ($address->getData()) {
+            $this->shippingAddress = $address;
+            return $this;
+        }
+
+        $shippingAddress = $this->getCart()->getCustomer()->getDefaultShippingAddress();
+        if ($shippingAddress) {
+            $cartShippingAddress = $address;
+            $cartShippingAddress->setCartId($this->getCart()->getId());
+            $cartShippingAddress->setFirstName($shippingAddress->getFirstname());
+            $cartShippingAddress->setLastName($shippingAddress->getLastname());
+            $cartShippingAddress->setAddressType(Ccc_Order_Model_Cart_Address::ADDRESS_TYPE_SHIPPING);
+            $cartShippingAddress->setAddress(implode(' ', $shippingAddress->getStreet()));
+            $cartShippingAddress->setCity($shippingAddress->getCity());
+            $cartShippingAddress->setState($shippingAddress->getRegion());
+            $cartShippingAddress->setCountry($shippingAddress->getCountryId());
+            $cartShippingAddress->setZipcode($shippingAddress->getPostcode());
+            $cartShippingAddress->save();
+            $this->shippingAddress = $cartShippingAddress;
+            return $this;
+        }
+        $this->shippingAddress = $address;
+        return $this;
+    }
+
+    public function getShippingAddress()
+    {
+        if (!$this->shippingAddress) {
+            $this->setShippingAddress();
+        }
+        return $this->shippingAddress;
     }
 }

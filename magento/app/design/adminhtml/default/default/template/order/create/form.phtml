@@ -1,3 +1,4 @@
+<?php $cart = $this->getCart(); ?>
 <div style="float: right;"><button title="Submit Order" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order/placeOrder', ['_current' => true]) ?>')"><span><span><span>Submit Order</span></span></span></button></div>
 <h4><?php echo $this->getHeader() ?></h4>
 
@@ -5,30 +6,30 @@
     <?php echo $this->getChildHtml('product'); ?>
 </div>
 <div style="margin-top:20px;">
-    <?php echo $this->getChildHtml('orderItems'); ?>
+    <?php echo $this->getChild('orderItems')->setCart($cart)->toHtml(); ?>
 </div>
 <div style="margin-top:20px;">
-    <?php echo $this->getChildHtml('accountInfo'); ?>
+    <?php echo $this->getChild('accountInfo')->setCart($cart)->toHtml(); ?>
 </div>
 <div style=" display: flex; margin-top:20px;">
     <div style="width: 60%;">
-        <?php echo $this->getChildHtml('billingAddress'); ?>
+        <?php echo $this->getChild('billingAddress')->setCart($cart)->toHtml(); ?>
     </div>
     <div style="margin-left:10px; width: 60%;">
-        <?php echo $this->getChildHtml('shippingAddress'); ?>
+        <?php echo $this->getChild('shippingAddress')->setCart($cart)->toHtml(); ?>
     </div>
 </div>
 
 <div style="display: flex; margin-top:20px;">
     <div style="width: 60%;">
-        <?php echo $this->getChildHtml('paymentMethod'); ?>
+        <?php echo $this->getChild('paymentMethod')->setCart($cart)->toHtml(); ?>
     </div>
     <div style="margin-left:10px; width: 60%;">
-        <?php echo $this->getChildHtml('shipmentMethod'); ?>
+        <?php echo $this->getChild('shipmentMethod')->setCart($cart)->toHtml(); ?>
     </div>
 </div>
 <div style="margin-top:20px;">
-    <?php echo $this->getChildHtml('orderTotal'); ?>
+    <?php echo $this->getChild('orderTotal')->setCart($cart)->toHtml(); ?>
 </div>
 <script>
     var base = new Base();

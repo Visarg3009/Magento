@@ -1,6 +1,8 @@
 <?php
 class Ccc_Order_Block_Adminhtml_Order_Create_Form_OrderItems_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $cart = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -11,6 +13,20 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_OrderItems_Grid extends Mage_A
         $this->setSaveParametersInSession(true);
     }
 
+    public function setCart(Ccc_Order_Model_Cart $cart)
+    {
+        $this->cart = $cart;
+        return $this;
+    }
+
+    public function getCart()
+    {
+        if (!$this->cart) {
+            Mage::throwException(Mage::helper('order')->__('Cart Is not set.'));
+        }
+        return $this->cart;
+    }
+
     public function getCartId()
     {
         return Mage::registry('order_cart')->getId();
@@ -18,9 +34,10 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_OrderItems_Grid extends Mage_A
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('order/cart_item')->getCollection()
-            ->addFieldToFilter('cart_id', array('eq', $this->getCartId()));
+        // $collection = Mage::getModel('order/cart_item')->getCollection()
+        //     ->addFieldToFilter('cart_id', array('eq', $this->getCartId()));
         // $collection->getSelect()->join();
+        $collection = $this->getCart()->getItems();
 
         $this->setCollection($collection);
         return parent::_prepareCollection();

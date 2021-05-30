@@ -1,12 +1,12 @@
 <div class="entry-edit">
-    <form id="shipmentForm" method="post" action="<?php echo $this->getUrl('order/adminhtml_order_create/saveShipment') ?>">
+    <form id="shipmentForm" method="post" action="<?php echo $this->getUrl('order/adminhtml_order_create/saveShipment', ['_current' => true]) ?>">
         <?php echo $this->getBlockHtml('formkey'); ?>
         <div class="entry-edit-head">
             <div style="float: right;"><button type="submit" form="shipmentForm">Save</button></div>
             <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
         </div>
         <div>
-            <?php echo $this->getChildHtml('shipmentMethodGrid'); ?>
+            <?php echo $this->getChild('shipmentMethodGrid')->setCart($this->getCart())->toHtml(); ?>
         </div>
     </form>
 </div>

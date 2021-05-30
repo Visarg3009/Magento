@@ -3,7 +3,7 @@
 
 <div class="order-address" id="order-shipping_address_fields">
     <div class="order-save-in-address-book">
-        <input name="sameAsBilling" type="checkbox" id="save-in-shipping-address-book" onclick="return disabledFields(this)" value="1" <?php if ($shippingAddress->getSaveAsBilling()) : ?>checked<?php endif; ?>>
+        <input name="sameAsBilling" type="checkbox" id="save-in-shipping-address-book" onclick="return disabledFields(this)" value="1" <?php if ($shippingAddress->getSameAsBilling()) : ?>checked<?php endif; ?>>
         <label for="save-in-shipping-address-book">Same as Billing</label> &nbsp;&nbsp;&nbsp;&nbsp;
     </div>
     <div class="content">

@@ -377,6 +377,15 @@ $table = $installer->getConnection()
         'Customer Name'
     )
     ->addColumn(
+        'customer_email',
+        Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        50,
+        array(
+            'nullable' => true,
+        ),
+        'Customer Email'
+    )
+    ->addColumn(
         'payment_method_code',
         Varien_Db_Ddl_Table::TYPE_VARCHAR,
         10,
@@ -551,31 +560,22 @@ $table = $installer->getConnection()
         'Cart Id'
     )
     ->addColumn(
-        'name',
-        Varien_Db_Ddl_Table::TYPE_VARCHAR,
-        20,
-        array(
-            'nullable' => true,
-        ),
-        'Name'
-    )
-    ->addColumn(
         'save_in_address_book',
         Varien_Db_Ddl_Table::TYPE_TINYINT,
         4,
         array(
             'nullable' => true,
         ),
-        'Svae In Address Book'
+        'Save In Address Book'
     )
     ->addColumn(
-        'save_as_billing',
+        'same_as_billing',
         Varien_Db_Ddl_Table::TYPE_TINYINT,
         4,
         array(
             'nullable' => true,
         ),
-        'save As Billing'
+        'Same As Billing'
     )
     ->addColumn(
         'address_type',

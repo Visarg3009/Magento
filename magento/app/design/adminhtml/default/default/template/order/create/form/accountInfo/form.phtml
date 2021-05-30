@@ -1,15 +1,15 @@
-<?php $customer = $this->getCustomerInfo(); ?>
+<?php $cart = $this->getCart(); ?>
 <fieldset>
     <div class="hor-scroll">
         <table cellspacing="0" class="form-list">
             <tbody>
                 <tr>
                     <td class="label"><label for="name"> Name <span class="required">*</span></label></td>
-                    <td class="value"><?php echo $customer->getName() ?></td>
+                    <td class="value"><?php echo $cart->getCustomerName() ?></td>
                 </tr>
                 <tr>
                     <td class="label"><label for="email">Email <span class="required">*</span></label></td>
-                    <td class="value"><?php echo $customer->getEmail() ?></td>
+                    <td class="value"><?php echo $cart->getCustomerEmail() ?></td>
                 </tr>
             </tbody>
         </table>
