@@ -128,4 +128,26 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
         }
         $cart->delete();
     }
+
+    public function getOrder()
+    {
+        $orderId = $this->getRequest()->getParam('id');
+        $order = Mage::getModel('order/order')->load($orderId);
+        if (!$order->getId()) {
+            throw new Exception("Invalid Order Id");
+        }
+
+        $order = Mage::getModel('order/order')->load($orderId, 'order_id');
+        if (!$order->getData()) {
+            throw new Exception("No Order Found!");
+        }
+        return $order;
+    }
+
+    public function viewAction()
+    {
+        $this->loadLayout();
+        $this->getLayout()->getBlock('main')->setOrder($order);
+        $this->renderLayout();
+    }
 }

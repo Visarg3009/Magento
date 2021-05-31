@@ -81,7 +81,7 @@ class Ccc_Order_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_G
         //             'actions'   => array(
         //                 array(
         //                     'caption' => Mage::helper('order')->__('View'),
-        //                     'url'     => array('base' => '*/order_order/view'),
+        //                     'url'     => array('base' => '*/adminhtml_order/view'),
         //                     'field'   => 'order_id',
         //                     'data-column' => 'action',
         //                 )
@@ -99,10 +99,10 @@ class Ccc_Order_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_G
 
     public function getRowUrl($row)
     {
-        if (Mage::getSingleton('admin/session')->isAllowed('order/order/actions/view')) {
-            return $this->getUrl('*/order_order/view', array('order_id' => $row->getId()));
-        }
-        return false;
+        // if (Mage::getSingleton('admin/session')->isAllowed('order/order/actions/view')) {
+        //     return $this->getUrl('*/order_order/view', array('order_id' => $row->getId()));
+        // }
+        // return false;
     }
 
     public function getGridUrl()

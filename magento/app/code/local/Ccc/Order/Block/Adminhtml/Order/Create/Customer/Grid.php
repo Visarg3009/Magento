@@ -78,7 +78,7 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Customer_Grid extends Mage_Adminhtm
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/adminhtml_order_create/new', ['customer_id' => $row->getId()]);
+        return $this->getUrl('*/adminhtml_order_create/neworder', ['customer_id' => $row->getId()]);
     }
 
     public function getGridUrl()

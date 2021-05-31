@@ -1,0 +1,46 @@
+<?php
+$buttons = $this->getButtonsHtml();
+$collection = $this->getCollection();
+$columns = $this->getColumns();
+?>
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <?php foreach ($columns as $key => $column) : ?>
+                <col width="<?php echo $column['width'] ?>" />
+            <?php endforeach; ?>
+            <col width="50" />
+            <thead>
+                <tr class="headings">
+                    <?php foreach ($columns as $key => $column) : ?>
+                        <th><span class="nobr"><a href="#" name="<?php echo $key ?>" title="asc" class="not-sort"><span class="sort-title"><?php echo $column['header'] ?></span></a></span></th>
+                    <?php endforeach; ?>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php if ($collection->getData()) : ?>
+                    <?php foreach ($collection as $row) : ?>
+
+                        <tr title="#">
+                            <td class=" "> <?php echo $row->getId() ?> </td>
+                            <td class=" "> <?php echo $row->getName() ?> </td>
+                            <td class=" "> <?php echo $row->getSku() ?> </td>
+                            <td class=" "> <?php echo $row->getBasePrice() ?> </td>
+                            <td class=" "> <input type="number" step="any" min="0" name="data[<?php echo $row->getId() ?>][price]" value="<?php echo $row->getPrice() ?>" required class="input-text"> </td>
+                            <td class="a-center "><input type="number" min="0" name="data[<?php echo $row->getId() ?>][quantity]" value="<?php echo $row->getQuantity() ?>" required class="input-text"></td>
+                            <td class=" "> <?php echo $row->getPrice() * $row->getQuantity() ?> </td>
+                            <td class=" "><button title="Delete" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order_create/deleteItem', ['_current' => true, 'item_id' => $row->getId()]) ?>')"><span>Delete</span></button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr title="#">
+                        <td colspan="8">No Records Found!</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

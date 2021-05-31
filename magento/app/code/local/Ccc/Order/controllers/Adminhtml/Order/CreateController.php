@@ -19,6 +19,26 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
         $this->getResponse()->setBody($this->getLayout()->createBlock('order/adminhtml_order_create_form_product_grid')->toHtml());
     }
 
+    protected function makeResponse($block, $message = null)
+    {
+        $response = [
+            'status' => 'success',
+            'message' => 'this is grid action.',
+            'element' => [
+                [
+                    'selector' => '#contentHtml',
+                    'html' => $block
+                ],
+                [
+                    'selector' => '#messageHtml',
+                    'html' => $message
+                ]
+            ]
+        ];
+        header("Content-Type: application/json");
+        echo json_encode($response);
+    }
+
     public function getCart()
     {
         $customerId = $this->getRequest()->getParam('customer_id');
@@ -45,6 +65,28 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
     }
 
     public function newAction()
+    {
+        try {
+            $cart = $this->getCart();
+            $this->updateCartItemPrice();
+            $this->updateCartTotal($cart);
+
+            $this->loadLayout();
+            $this->getLayout()->getBlock('main')->setCart($cart);
+            $this->_setActiveMenu('order');
+            $this->_title('New Order');
+            $block = $this->getLayout()->getBlock('content')->toHtml();
+            $message = $this->getLayout()->getBlock('messages')->toHtml();
+            $this->makeResponse($block, $message);
+            //$this->renderLayout();
+        } catch (Exception $e) {
+            $this->_getSession()->addError($e->getMessage());
+            $this->_redirect('*/*/');
+            return;
+        }
+    }
+
+    public function neworderAction()
     {
         try {
             $cart = $this->getCart();
@@ -88,7 +130,7 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
         } catch (Exception $e) {
             $this->_getSession()->addError($e->getMessage());
         }
-        $this->_redirect('*/*/new', ['_current' => true]);
+        $this->_redirect('*/*/neworder', ['_current' => true]);
     }
 
     public function updateCartAction()

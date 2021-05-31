@@ -1,0 +1,17 @@
+<div><button type="button" style="float: right;" onclick="return showProducts(this)">Add Products To Cart</button></div>
+<div class="entry-edit">
+    <div id="productGrid" style="display: none">
+        <div class="entry-edit-head">
+            <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+        </div>
+        <div>
+            <?php echo $this->getChildHtml('productGrid'); ?>
+        </div>
+    </div>
+</div>
+<script>
+    function showProducts() {
+        document.getElementById("productGrid").style.display = 'block';
+        this.style.display = "none";
+    }
+</script>

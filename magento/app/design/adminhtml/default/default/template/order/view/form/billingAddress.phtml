@@ -8,7 +8,7 @@
             <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
         </div>
         <div>
-            <?php echo $this->getChild('billingAddressForm')->setCart($this->getCart())->toHtml(); ?>
+            <?php echo $this->getChild('billingAddressForm')->toHtml(); ?>
         </div>
     </form>
 </div>

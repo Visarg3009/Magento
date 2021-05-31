@@ -1,5 +1,5 @@
 <?php
-class Ccc_Order_Block_Adminhtml_Order_Create_Form_Product_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Ccc_Order_Block_Adminhtml_Order_View_Form_Product_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     public function __construct()
     {
