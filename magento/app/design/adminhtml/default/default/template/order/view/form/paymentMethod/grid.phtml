@@ -1,12 +1,10 @@
 <?php $paymentMethods = $this->getPayemntMethodTitle(); ?>
-<?php //$cart = $this->getCart(); 
+<?php $order = $this->getOrder();
 ?>
 <div class="entry-edit">
     <fieldset>
         <span class="nowrap" style="font-size:10px;">
-            <?php foreach ($paymentMethods as $key => $value) : ?>
-                <input type="radio" <?php if ($cart->getPaymentMethodCode() == $key) { ?> checked <?php } ?> name="paymentMethod" value="<?php echo $key ?>"> <?php echo $value->getTitle(); ?><br>
-            <?php endforeach; ?>
+            <td><?php echo $order->getPaymentMethodCode(); ?></td>
         </span>
     </fieldset>
 </div>

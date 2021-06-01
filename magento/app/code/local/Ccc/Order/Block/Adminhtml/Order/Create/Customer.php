@@ -15,4 +15,9 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Customer extends Mage_Adminhtml_Blo
     {
         return $this->getUrl('*/adminhtml_order/index');
     }
+
+    public function getCreateUrl()
+    {
+        return $this->getUrl('admin/customer/new');
+    }
 }

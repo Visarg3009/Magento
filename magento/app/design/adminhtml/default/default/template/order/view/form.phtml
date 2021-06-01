@@ -1,39 +1,34 @@
-<?php //$cart = $this->getCart(); 
-?>
+<?php $order = $this->getOrder(); ?>
 <div id="messageHtml"></div>
 <div id="contentHtml">
-    <!-- <div style="float: right;"><button title="Submit Order" type="button" class="scalable save" onclick="setLocation('<?php //echo $this->getUrl('*/adminhtml_order/placeOrder', ['_current' => true]) 
-                                                                                                                            ?>')"><span><span><span>Submit Order</span></span></span></button></div> -->
+    <div style="float: right;"><button title="Back" type="submit" class="scalable back" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order/index') ?>')"><span><span><span>Back</span></span></span></button></div>
     <h4><?php echo $this->getHeader() ?></h4>
 
-    <div style="margin-top:10px;">
-        <?php echo $this->getChildHtml('product'); ?>
+    <div style="margin-top:20px;">
+        <?php echo $this->getChild('orderItems')->setOrder($order)->toHtml(); ?>
     </div>
     <div style="margin-top:20px;">
-        <?php echo $this->getChildHtml('orderItems'); ?>
-    </div>
-    <div style="margin-top:20px;">
-        <?php echo $this->getChildHtml('accountInfo'); ?>
+        <?php echo $this->getChild('accountInfo')->setOrder($order)->toHtml(); ?>
     </div>
     <div style=" display: flex; margin-top:20px;">
         <div style="width: 60%;">
-            <?php echo $this->getChildHtml('billingAddress'); ?>
+            <?php echo $this->getChild('billingAddress')->setOrder($order)->toHtml(); ?>
         </div>
         <div style="margin-left:10px; width: 60%;">
-            <?php echo $this->getChildHtml('shippingAddress'); ?>
+            <?php echo $this->getChild('shippingAddress')->setOrder($order)->toHtml(); ?>
         </div>
     </div>
 
     <div style="display: flex; margin-top:20px;">
         <div style="width: 60%;">
-            <?php echo $this->getChildHtml('paymentMethod'); ?>
+            <?php echo $this->getChild('paymentMethod')->setOrder($order)->toHtml(); ?>
         </div>
         <div style="margin-left:10px; width: 60%;">
-            <?php echo $this->getChildHtml('shipmentMethod'); ?>
+            <?php echo $this->getChild('shipmentMethod')->setOrder($order)->toHtml(); ?>
         </div>
     </div>
     <div style="margin-top:20px;">
-        <?php echo $this->getChildHtml('orderTotal'); ?>
+        <?php echo $this->getChild('orderTotal')->setOrder($order)->toHtml(); ?>
     </div>
 </div>
 <script>

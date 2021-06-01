@@ -87,6 +87,8 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
             $orderItem = Mage::getModel('order/order_item');
             $orderItem->setOrderId($order->getId());
             $orderItem->setProductId($cartItem->getProductId());
+            $orderItem->setSku($cartItem->getSku());
+            $orderItem->setName($cartItem->getName());
             $orderItem->setQuantity($cartItem->getQuantity());
             $orderItem->setBasePrice($cartItem->getBasePrice());
             $orderItem->setPrice($cartItem->getPrice());
@@ -131,7 +133,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
 
     public function getOrder()
     {
-        $orderId = $this->getRequest()->getParam('id');
+        $orderId = $this->getRequest()->getParam('order_id');
         $order = Mage::getModel('order/order')->load($orderId);
         if (!$order->getId()) {
             throw new Exception("Invalid Order Id");
@@ -147,6 +149,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
     public function viewAction()
     {
         $this->loadLayout();
+        $order = $this->getOrder();
         $this->getLayout()->getBlock('main')->setOrder($order);
         $this->renderLayout();
     }

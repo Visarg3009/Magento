@@ -1,4 +1,4 @@
-<?php //$cart = $this->getCart(); 
+<?php $order = $this->getOrder();
 ?>
 <fieldset>
     <div class="hor-scroll">
@@ -6,11 +6,11 @@
             <tbody>
                 <tr>
                     <td class="label"><label for="name"> Name <span class="required">*</span></label></td>
-                    <td class="value"><?php echo $cart->getCustomerName() ?></td>
+                    <td class="value"><?php echo $order->getCustomerName() ?></td>
                 </tr>
                 <tr>
                     <td class="label"><label for="email">Email <span class="required">*</span></label></td>
-                    <td class="value"><?php echo $cart->getCustomerEmail() ?></td>
+                    <td class="value"><?php echo $order->getCustomerEmail() ?></td>
                 </tr>
             </tbody>
         </table>

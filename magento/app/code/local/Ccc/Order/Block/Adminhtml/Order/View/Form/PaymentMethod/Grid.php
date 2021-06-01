@@ -1,20 +1,20 @@
 <?php
 class Ccc_Order_Block_Adminhtml_Order_View_Form_PaymentMethod_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-    protected $cart = null;
+    protected $order = null;
 
-    public function setCart(Ccc_Order_Model_Cart $cart)
+    public function setOrder(Ccc_Order_Model_Order $order)
     {
-        $this->cart = $cart;
+        $this->order = $order;
         return $this;
     }
 
-    public function getCart()
+    public function getOrder()
     {
-        if (!$this->cart) {
-            Mage::throwException(Mage::helper('order')->__('Cart Is not set.'));
+        if (!$this->order) {
+            Mage::throwException(Mage::helper('order')->__('Order Is not set.'));
         }
-        return $this->cart;
+        return $this->order;
     }
 
     public function __construct()

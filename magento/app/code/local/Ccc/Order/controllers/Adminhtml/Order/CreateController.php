@@ -415,6 +415,6 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
             Mage::logException($e);
             Mage::getSingleton('core/session')->addError($e->getMessage());
         }
-        $this->_redirect('*/*/new', ['customer_id' => $this->getCart()->getCustomerId()]);
+        $this->_redirect('*/*/newOrder', ['customer_id' => $this->getCart()->getCustomerId()]);
     }
 }

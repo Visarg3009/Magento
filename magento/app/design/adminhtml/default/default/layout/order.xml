@@ -104,7 +104,7 @@
                 <block type="order/adminhtml_order_view_form_orderItems" template="order/view/form/orderItems.phtml" name="orderItems">
                     <block type="order/adminhtml_order_view_form_orderItems_grid" template="order/view/form/orderItems/grid.phtml" name="orderItemsGrid" />
                 </block>
-                <!-- <block type="order/adminhtml_order_view_form_accountInfo" template="order/view/form/accountInfo.phtml" name="accountInfo">
+                <block type="order/adminhtml_order_view_form_accountInfo" template="order/view/form/accountInfo.phtml" name="accountInfo">
                     <block type="order/adminhtml_order_view_form_accountInfo_form" template="order/view/form/accountInfo/form.phtml" name="accountInfoForm" />
                 </block>
                 <block type="order/adminhtml_order_view_form_billingAddress" template="order/view/form/billingAddress.phtml" name="billingAddress">
@@ -118,8 +118,8 @@
                 </block>
                 <block type="order/adminhtml_order_view_form_shipmentMethod" template="order/view/form/shipmentMethod.phtml" name="shipmentMethod">
                     <block type="order/adminhtml_order_view_form_shipmentMethod_grid" template="order/view/form/shipmentMethod/grid.phtml" name="shipmentMethodGrid" />
-                </block> 
-                <block type="order/adminhtml_order_view_form_orderTotal" template="order/view/form/orderTotal.phtml" name="orderTotal"></block>-->
+                </block>
+                <block type="order/adminhtml_order_view_form_orderTotal" template="order/view/form/orderTotal.phtml" name="orderTotal"></block>
             </block>
         </reference>
     </order_adminhtml_order_view>

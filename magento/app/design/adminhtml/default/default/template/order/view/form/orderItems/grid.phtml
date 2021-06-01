@@ -16,7 +16,6 @@ $columns = $this->getColumns();
                         <th><span class="nobr"><a href="#" name="<?php echo $key ?>" title="asc" class="not-sort"><span class="sort-title"><?php echo $column['header'] ?></span></a></span></th>
                     <?php endforeach; ?>
                     <th>Total</th>
-                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -29,10 +28,9 @@ $columns = $this->getColumns();
                             <td class=" "> <?php echo $row->getName() ?> </td>
                             <td class=" "> <?php echo $row->getSku() ?> </td>
                             <td class=" "> <?php echo $row->getBasePrice() ?> </td>
-                            <td class=" "> <input type="number" step="any" min="0" name="data[<?php echo $row->getId() ?>][price]" value="<?php echo $row->getPrice() ?>" required class="input-text"> </td>
-                            <td class="a-center "><input type="number" min="0" name="data[<?php echo $row->getId() ?>][quantity]" value="<?php echo $row->getQuantity() ?>" required class="input-text"></td>
+                            <td class=" "> <?php echo $row->getPrice() ?> </td>
+                            <td class=" "> <?php echo $row->getQuantity() ?></td>
                             <td class=" "> <?php echo $row->getPrice() * $row->getQuantity() ?> </td>
-                            <td class=" "><button title="Delete" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/adminhtml_order_create/deleteItem', ['_current' => true, 'item_id' => $row->getId()]) ?>')"><span>Delete</span></button></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>

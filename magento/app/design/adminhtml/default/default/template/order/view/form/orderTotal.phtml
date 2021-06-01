@@ -1,12 +1,4 @@
-<?php //$cart = $this->getCart(); 
-?>
-<?php
-$grandTotal = 0.00 + $cart->getTotal();
-if ($cart->getShippingAmount()) {
-    $grandTotal += $cart->getShippingAmount();
-}
-$grandTotal = floatval($grandTotal);
-?>
+<?php $order = $this->getOrder(); ?>
 <div class="box-right entry-edit">
     <div class="entry-edit-head">
         <h4>Order Totals</h4>
@@ -17,21 +9,21 @@ $grandTotal = floatval($grandTotal);
                 <tr>
                     <td class="a-right" colspan="1">Subtotal </td>
                     <td class="a-right">
-                        <span class="price"><?php if ($cart->getTotal()) : ?><?php echo "$" . $cart->getTotal() ?><?php else : ?><?php echo "$0.00" ?><?php endif; ?></span>
+                        <span class="price"><?php echo "$" . $order->getTotal() ?></span>
                     </td>
                 </tr>
-                <?php if ($cart->getShippingMethodCode()) : ?>
+                <?php if ($order->getShippingMethodCode()) : ?>
                     <tr>
-                        <td class="a-right" colspan="1">Shipping Method (<?php echo $cart->getShippingMethodCode() ?>) </td>
+                        <td class="a-right" colspan="1">Shipping Method (<?php echo $order->getShippingMethodCode() ?>) </td>
                         <td class="a-right">
-                            <span class="price">$<?php echo $cart->getShippingAmount() ?></span>
+                            <span class="price">$<?php echo $order->getShippingAmount() ?></span>
                         </td>
                     </tr>
                 <?php endif; ?>
                 <tr>
                     <td class="a-right" colspan="1"><strong>Grand Total</strong></td>
                     <td class="a-right">
-                        <strong><span class="price">$<?php echo $grandTotal; ?></span></strong>
+                        <strong><span class="price">$<?php echo $order->getGrandTotal(); ?></span></strong>
                     </td>
                 </tr>
             </tbody>

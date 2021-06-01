@@ -1,7 +1,7 @@
 <?php
 class Ccc_Order_Block_Adminhtml_Order_View_Form_OrderItems_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-    protected $cart = null;
+    protected $order = null;
 
     public function __construct()
     {
@@ -13,31 +13,27 @@ class Ccc_Order_Block_Adminhtml_Order_View_Form_OrderItems_Grid extends Mage_Adm
         $this->setSaveParametersInSession(true);
     }
 
-    public function setCart(Ccc_Order_Model_Cart $cart)
+    public function setOrder(Ccc_Order_Model_Order $order)
     {
-        $this->cart = $cart;
+        $this->order = $order;
         return $this;
     }
 
-    public function getCart()
+    public function getOrder()
     {
-        if (!$this->cart) {
-            Mage::throwException(Mage::helper('order')->__('Cart Is not set.'));
+        if (!$this->order) {
+            Mage::throwException(Mage::helper('order')->__('Order Is not set.'));
         }
-        return $this->cart;
+        return $this->order;
     }
 
-    public function getCartId()
-    {
-        return Mage::registry('order_cart')->getId();
-    }
 
     protected function _prepareCollection()
     {
         // $collection = Mage::getModel('order/cart_item')->getCollection()
         //     ->addFieldToFilter('cart_id', array('eq', $this->getCartId()));
         // $collection->getSelect()->join();
-        $collection = $this->getCart()->getItems();
+        $collection = $this->getOrder()->getItems();
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -80,14 +76,14 @@ class Ccc_Order_Block_Adminhtml_Order_View_Form_OrderItems_Grid extends Mage_Adm
 
     public function getRowUrl($row)
     {
-        if (Mage::getSingleton('admin/session')->isAllowed('order/order/actions/view')) {
-            return $this->getUrl('*/order_order/view', array('order_id' => $row->getId()));
-        }
-        return false;
+        // if (Mage::getSingleton('admin/session')->isAllowed('order/order/actions/view')) {
+        //     return $this->getUrl('*/order_order/view', array('order_id' => $row->getId()));
+        // }
+        // return false;
     }
 
     public function getGridUrl()
     {
-        return $this->getUrl('*/*/grid', array('_current' => true));
+        //return $this->getUrl('*/*/grid', array('_current' => true));
     }
 }

@@ -84,6 +84,7 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_Product_Grid extends Mage_Admi
 
         $this->getMassactionBlock()->addItem('add', array(
             'label' => Mage::helper('order')->__('Add Items'),
+            'selected' => true,
             'url'  => $this->getUrl('*/*/massAddition', array('_current' => true)),
             'confirm' => Mage::helper('order')->__('Are you sure?')
         ));

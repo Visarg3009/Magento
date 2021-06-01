@@ -1,5 +1,5 @@
 <?php $countries = $this->getCountryOptions(); ?>
-<?php //$billingAddress = $this->getBillingAddress(); 
+<?php $billingAddress = $this->getBillingAddress();
 ?>
 <fieldset>
     <div class="order-address" id="order-billing_address_fields">
@@ -9,53 +9,32 @@
                     <tbody>
                         <tr>
                             <td class="label"><label for="name">Name <span class="required">*</span></label></td>
-                            <td class="value">
-                                <input id="name" name="name" value="<?php echo $billingAddress->getName() ?>" class=" required-entry input-text required-entry" required type="text">
-                            </td>
+                            <td class="value"> <?php echo $billingAddress->getName() ?> </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="address">Address <span class="required">*</span></label></td>
-                            <td class="value">
-                                <div class="multi-input"><input id="address" name="address" value="<?php echo $billingAddress->getAddress() ?>" class="input-text required-entry" required type="text">
-                                </div>
-                            </td>
+                            <td class="value"> <?php echo $billingAddress->getAddress() ?> </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="city">City <span class="required">*</span></label></td>
-                            <td class="value">
-                                <input id="city" name="city" value="<?php echo $billingAddress->getCity() ?>" class=" required-entry input-text required-entry" required type="text">
-                            </td>
+                            <td class="value"><?php echo $billingAddress->getCity() ?> </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="state">State <span class="required">*</span></label></td>
-                            <td class="value">
-                                <input id="state" name="state" value="<?php echo $billingAddress->getState() ?>" class=" required-entry input-text required-entry" required type="text">
-                            </td>
+                            <td class="value"> <?php echo $billingAddress->getState() ?> </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="zipcode">Zipcode <span class="required">*</span></label></td>
-                            <td class="value">
-                                <input id="zipcode" name="zipcode" value="<?php echo $billingAddress->getZipcode() ?>" class=" required-entry input-text required-entry" required type="text">
-                            </td>
+                            <td class="value"> <?php echo $billingAddress->getZipcode() ?> </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="country_id">Country <span class="required">*</span></label></td>
-                            <td class="value">
-                                <select id="country_id" name="country" class="required-entry required-entry select">
-                                    <?php foreach ($countries as $country) : ?>
-                                        <option value="<?php echo $country['value'] ?>" <?php if ($country['value'] == $billingAddress->getCountry()) : ?>selected<?php endif; ?>><?php echo $country['label'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                            <td class="value"><?php echo $billingAddress->getCountry() ?> </td>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="order-save-in-address-book">
-            <input name="saveInBillingAddress" type="checkbox" id="save-in-billing-address-book" value="1">
-            <label for="save-in-billing-address-book">Save in address book</label>
-        </div>
-
     </div>
 </fieldset>
