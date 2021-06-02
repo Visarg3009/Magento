@@ -9,38 +9,38 @@
                         <tr>
                             <td class="label"><label for="name">Name <span class="required">*</span></label></td>
                             <td class="value">
-                                <input id="name" name="name" value="<?php echo $billingAddress->getName() ?>" class=" required-entry input-text required-entry" required type="text">
+                                <input id="name" name="name" value="<?php echo $billingAddress->getName() ?>" class="billing required-entry input-text required-entry" required type="text">
                             </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="address">Address <span class="required">*</span></label></td>
                             <td class="value">
-                                <div class="multi-input"><input id="address" name="address" value="<?php echo $billingAddress->getAddress() ?>" class="input-text required-entry" required type="text">
+                                <div class="multi-input"><input id="address" name="address" value="<?php echo $billingAddress->getAddress() ?>" class="billing input-text required-entry" required type="text">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="city">City <span class="required">*</span></label></td>
                             <td class="value">
-                                <input id="city" name="city" value="<?php echo $billingAddress->getCity() ?>" class=" required-entry input-text required-entry" required type="text">
+                                <input id="city" name="city" value="<?php echo $billingAddress->getCity() ?>" class="billing required-entry input-text required-entry" required type="text">
                             </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="state">State <span class="required">*</span></label></td>
                             <td class="value">
-                                <input id="state" name="state" value="<?php echo $billingAddress->getState() ?>" class=" required-entry input-text required-entry" required type="text">
+                                <input id="state" name="state" value="<?php echo $billingAddress->getState() ?>" class="billing required-entry input-text required-entry" required type="text">
                             </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="zipcode">Zipcode <span class="required">*</span></label></td>
                             <td class="value">
-                                <input id="zipcode" name="zipcode" value="<?php echo $billingAddress->getZipcode() ?>" class=" required-entry input-text required-entry" required type="text">
+                                <input id="zipcode" name="zipcode" value="<?php echo $billingAddress->getZipcode() ?>" class="billing required-entry input-text required-entry" required type="text">
                             </td>
                         </tr>
                         <tr>
                             <td class="label"><label for="country_id">Country <span class="required">*</span></label></td>
                             <td class="value">
-                                <select id="country_id" name="country" class="required-entry required-entry select">
+                                <select id="country_id" name="country" class="billing required-entry required-entry select">
                                     <?php foreach ($countries as $country) : ?>
                                         <option value="<?php echo $country['value'] ?>" <?php if ($country['value'] == $billingAddress->getCountry()) : ?>selected<?php endif; ?>><?php echo $country['label'] ?></option>
                                     <?php endforeach; ?>

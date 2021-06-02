@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ccc_Order>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
         </Ccc_Order>
     </modules>
 
@@ -85,6 +85,9 @@
                     <cart_address>
                         <table>cart_address</table>
                     </cart_address>
+                    <order_comment_history>
+                        <table>order_comment_history</table>
+                    </order_comment_history>
                 </entities>
             </order_resource>
         </models>

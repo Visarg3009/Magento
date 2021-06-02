@@ -10,7 +10,7 @@
                 } else {
                     $data = 0.00;
                 } ?>
-                <input type="radio" name="shipmentMethod" <?php if ($key == $cart->getShippingMethodCode()) : ?> checked <?php endif; ?> value="<?php echo $key . ' ' . $data; ?>" required>
+                <input type="radio" class="shipment" name="shipmentMethod" <?php if ($key == $cart->getShippingMethodCode()) : ?> checked <?php endif; ?> value="<?php echo $key . ' ' . $data; ?>" required>
                 <?php echo $value->getconfigData('title') . ' '; ?><strong>$<?php if ($value->getconfigData('price')) {
                                                                                 echo $value->getconfigData('price');
                                                                             } else {

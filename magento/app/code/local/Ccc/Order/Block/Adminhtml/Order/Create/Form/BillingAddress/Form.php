@@ -87,8 +87,7 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_BillingAddress_Form extends Ma
         if ($billingAddress) {
             $cartBillingAddress = $address;
             $cartBillingAddress->setCartId($this->getCart()->getId());
-            $cartBillingAddress->setFirstName($billingAddress->getFirstname());
-            $cartBillingAddress->setLastName($billingAddress->getLastname());
+            $cartBillingAddress->setName($billingAddress->getFirstname());
             $cartBillingAddress->setAddressType(Ccc_Order_Model_Cart_Address::ADDRESS_TYPE_BILLING);
             $cartBillingAddress->setAddress(implode(' ', $billingAddress->getStreet()));
             $cartBillingAddress->setCity($billingAddress->getCity());

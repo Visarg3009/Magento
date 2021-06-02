@@ -106,6 +106,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
             $orderAddress = Mage::getModel('order/order_address');
             $orderAddress->setOrderId($order->getId());
             $orderAddress->setCustomerId($order->getCustomerId());
+            $orderAddress->setName($cartAddress->getName());
             $orderAddress->setCartAddressId($cartAddress->getId());
             $orderAddress->setAddressType($cartAddress->getAddressType());
             $orderAddress->setAddress($cartAddress->getAddress());

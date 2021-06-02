@@ -1,0 +1,24 @@
+<?php $order = $this->getOrder(); ?>
+<?php $statuses = $this->getStatusOptions(); ?>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4>Order History</h4>
+    </div>
+    <fieldset id="order-comment">
+        <!--<h4 class="icon-head fieldset-legend head-comment">Order Comment</h4>-->
+        <label for="staus">Order Status</label> &nbsp;&nbsp;&nbsp;&nbsp;
+        <select id="status" name="status" id="status" class="required-entry select">
+            <?php foreach ($statuses as $key => $status) : ?>
+                <option value="<?php echo $key ?>" <?php if ($key == $order->getStatus()) : ?>selected<?php endif; ?>><?php echo $status ?></option>
+            <?php endforeach; ?>
+        </select><br>
+        <!-- <textarea style="width:98%; height:8em;" id="order-status" name="comment" rows="2" cols="15"></textarea> -->
+
+        <label for="order-comment">Order Comments</label><br>
+        <textarea style="width:98%; height:8em;" id="order-comment" name="comment" rows="2" cols="15"></textarea>
+        <div style="float: right;">
+            <button type="button" form="billingform"><span>Submit Comment</span></button>
+        </div>
+    </fieldset>
+</div>

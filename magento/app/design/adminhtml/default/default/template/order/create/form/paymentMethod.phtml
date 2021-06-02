@@ -2,7 +2,7 @@
     <form id="paymentForm" method="post" action="<?php echo $this->getUrl('*/adminhtml_order_create/savePayment', ['_current' => true]) ?>">
         <?php echo $this->getBlockHtml('formkey'); ?>
         <div class="entry-edit-head">
-            <div style="float: right;"><button type="button" onclick="base.setform('#paymentForm').load()" form="paymentForm">Save</button></div>
+            <div style="float: right;"><button type="button" onclick="checkPaymentForm()" form="paymentForm">Save</button></div>
             <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
         </div>
         <div>
@@ -10,3 +10,22 @@
         </div>
     </form>
 </div>
+<script>
+    function checkPaymentForm() {
+        flag = 1;
+        var fields = document.getElementsByClassName('payment');
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i].checked == true) {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag) {
+            alert("Please Select Payment Method")
+            return false;
+        } else {
+            var form = document.getElementById('paymentForm');
+            base.setform(form).load();
+        }
+    }
+</script>

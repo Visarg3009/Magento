@@ -86,8 +86,7 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_ShippingAddress_Form extends M
         if ($shippingAddress) {
             $cartShippingAddress = $address;
             $cartShippingAddress->setCartId($this->getCart()->getId());
-            $cartShippingAddress->setFirstName($shippingAddress->getFirstname());
-            $cartShippingAddress->setLastName($shippingAddress->getLastname());
+            $cartShippingAddress->setName($shippingAddress->getFirstname());
             $cartShippingAddress->setAddressType(Ccc_Order_Model_Cart_Address::ADDRESS_TYPE_SHIPPING);
             $cartShippingAddress->setAddress(implode(' ', $shippingAddress->getStreet()));
             $cartShippingAddress->setCity($shippingAddress->getCity());

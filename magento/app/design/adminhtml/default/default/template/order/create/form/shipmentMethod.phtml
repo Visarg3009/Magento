@@ -2,7 +2,7 @@
     <form id="shipmentForm" method="post" action="<?php echo $this->getUrl('order/adminhtml_order_create/saveShipment', ['_current' => true]) ?>">
         <?php echo $this->getBlockHtml('formkey'); ?>
         <div class="entry-edit-head">
-            <div style="float: right;"><button type="button" onclick="base.setform('#shipmentForm').load()" form="shipmentForm">Save</button></div>
+            <div style="float: right;"><button type="button" onclick="checkShipmentForm()" form="shipmentForm">Save</button></div>
             <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
         </div>
         <div>
@@ -10,3 +10,23 @@
         </div>
     </form>
 </div>
+
+<script>
+    function checkShipmentForm() {
+        flag = 1;
+        var fields = document.getElementsByClassName('shipment');
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i].checked == true) {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag) {
+            alert("Please Select Shipping Method")
+            return false;
+        } else {
+            var form = document.getElementById('shipmentForm');
+            base.setform(form).load();
+        }
+    }
+</script>

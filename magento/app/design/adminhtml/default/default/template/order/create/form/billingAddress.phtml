@@ -3,7 +3,7 @@
         <?php echo $this->getBlockHtml('formkey'); ?>
         <div class="entry-edit-head">
             <div style="float: right;">
-                <button type="button" onclick="base.setform('#billingform').load()" form="billingform"><span>Save</span></button>
+                <button type="button" onclick="checkBillingForm()" form="billingform"><span>Save</span></button>
             </div>
             <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
         </div>
@@ -12,3 +12,22 @@
         </div>
     </form>
 </div>
+<script>
+    function checkBillingForm() {
+        flag = 0;
+        var fields = document.getElementsByClassName('billing');
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i].value == "" || fields[i].value == undefined) {
+                alert("Please Fill " + fields[i].name + " value");
+                flag = 1;
+                return false;
+            }
+        }
+        if (flag) {
+            return false;
+        } else {
+            var form = document.getElementById('billingform');
+            base.setform(form).load();
+        }
+    }
+</script>

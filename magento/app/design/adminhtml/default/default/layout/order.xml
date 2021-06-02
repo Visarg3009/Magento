@@ -119,6 +119,7 @@
                 <block type="order/adminhtml_order_view_form_shipmentMethod" template="order/view/form/shipmentMethod.phtml" name="shipmentMethod">
                     <block type="order/adminhtml_order_view_form_shipmentMethod_grid" template="order/view/form/shipmentMethod/grid.phtml" name="shipmentMethodGrid" />
                 </block>
+                <block type="order/adminhtml_order_view_form_comments" template="order/view/form/comments.phtml" name="comments"></block>
                 <block type="order/adminhtml_order_view_form_orderTotal" template="order/view/form/orderTotal.phtml" name="orderTotal"></block>
             </block>
         </reference>

@@ -27,8 +27,13 @@
             <?php echo $this->getChild('shipmentMethod')->setOrder($order)->toHtml(); ?>
         </div>
     </div>
-    <div style="margin-top:20px;">
-        <?php echo $this->getChild('orderTotal')->setOrder($order)->toHtml(); ?>
+    <div style="display: flex; margin-top:20px;">
+        <div style="width: 60%;">
+            <?php echo $this->getChild('comments')->setOrder($order)->toHtml(); ?>
+        </div>
+        <div style="margin-left:10px; width: 60%;">
+            <?php echo $this->getChild('orderTotal')->setOrder($order)->toHtml(); ?>
+        </div>
     </div>
 </div>
 <script>
